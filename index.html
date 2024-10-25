@@ -8,15 +8,39 @@
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 <body>
+    <!-- Header Section -->
     <header>
-
+        <h1>Game Seek</h1>
+        <p>A place to seek for games</p>
     </header>
-    <main>
-        <section>
 
+    <!-- Main Content Section -->
+    <main class="container">
+        <!-- Search Bar Section -->
+        <section class="search-bar">
+            <form id="game-search-form">
+                <!-- Search Input -->
+                <label for="search-input">Search for games:</label>
+                <input type="text" id="search-input" name="search" placeholder="Search" />
+                <!-- Submit Button -->
+                <button type="submit">Search</button>
+            </form>
+        </section>
+
+        <!-- Results Section -->
+        <section class="game-list">
+            <h2>Search Results</h2>
+            <div id="game-results">
+                <!-- Placeholder for dynamically populated game results -->
+                <p>Use the search above to find games matching your criteria.</p>
+            </div>
         </section>
     </main>
+
+    <!-- Footer Section -->
     <footer>
-        <script src="script.js"></script>
+        <p>a footer</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
