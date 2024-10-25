@@ -5,26 +5,68 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameSeek</title>
     <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .rainbow-text {
+                background: linear-gradient(90deg, #ff0000, #ff7f00, #ffff00, #00ff00, #0000ff, #4b0082, #8b00ff);
+                -webkit-background-clip: text;
+                color: transparent;
+                animation: rainbow 5s infinite;
+            }
+            @keyframes rainbow {
+                0%, 100% { background-position: 0% 50%; }
+                50% { background-position: 100% 50%; }
+            }
+            .colorful-text {
+                color: #ff7f00; /* You can change this to any color you like */
+            }
+        }
+    
+        /* If you want to add other custom styles, do it here */
+        .bg-nes-gray {
+            background-color: #7b7b7b; /* NES gray */
+        }
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'nes-red': '#8e2538',
+                        'nes-purple': '#7e2553',
+                        'nes-blue': '#2d3c6e',
+                        'nes-green': '#2d6a4f',
+                        'nes-yellow': '#8a8e0a',
+                        'nes-orange': '#cd5c0f',
+                        'nes-gray': '#7b7b7b',
+                        'nes-light-gray': '#b7b7b7',
+                        'nes-dark-gray': '#414141',
+                        'nes-white': '#ffffff',
+                        'nes-black': '#000000',
+                    },
+                },
+            },
+        }
+    </script>
 </head>
-<body>
-    <header>
-        <h1>Welcome To GameSeek!</h1>
-        <h3>About Us</h3>
-        <p>A cool informative website to help you look for new releases of games and metadata about them!</p>
-        
-        
+<body class="bg-nes-gray text-nes-white">
+    <header class="text-center p-4">
+        <h1 class="text-4xl rainbow-text">Welcome To GameSeek!</h1>
+        <h3 class="text-2xl text-nes-yellow mt-2">About Us</h3>
+        <p class="text-nes-light-gray mt-2 colorful-text">A cool informative website to help you look for new releases of games and metadata about them!</p>
     </header>
-    <main>
-        <section>
-
+    <main class="flex flex-col items-center mt-8">
+        <section class="text-center">
+            <img src="GameSeekLogo.webp" alt="GameSeek" class="w-1/2 mx-auto mb-4">
+            <p class="text-nes-light-gray mb-4 colorful-text">Click the button below to get started!</p>
+            <button id="button" class="nes-btn is-primary" aria-label="Start GameSeek">Click Me!</button>
         </section>
     </main>
-
-    <footer>
-        <h2>Made by Hassan, John, Anthony, Camryn</h2>
-        <script src="script.js"></script>
-
+    <footer class="text-center p-4 mt-8">
+        <h2 class="text-nes-light-gray">Made by Hassan, John, Anthony, Camryn</h2>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>

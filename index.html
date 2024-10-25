@@ -3,20 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameSeek</title>
+    <title>GameSeek</title> 
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue': '#1fb6ff',
+                        'purple': '#7e5bef',
+                        'pink': '#ff49db',
+                        'orange': '#ff7849',
+                        'green': '#13ce66',
+                        'yellow': '#ffc82c',
+                        'gray-dark': '#273444',
+                        'gray': '#8492a6',
+                        'gray-light': '#d3dce6',
+                    },
+                    fontFamily: {
+                        sans: ['Graphik', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    spacing: {
+                        '8xl': '96rem',
+                        '9xl': '128rem',
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
 </head>
-<body>
-    <header>
-
+<body class="bg-gray-light text-gray-dark font-sans">
+    <header class="p-4 bg-blue text-white">
+        <h1 class="text-4xl">GameSeek</h1>
+        <nav class="mt-4">
+            <div class="search-bar mb-4">
+                <input type="text" id="search" class="nes-input w-full" placeholder="Search...">
+            </div>
+            <button type="button" class="nes-btn is-primary">Search</button>
+            <aside class="mt-4">
+                <div class="filter-box grid grid-cols-1 gap-4">
+                    <div class="filter-item" id="genre1">
+                      <h2 class="text-xl">Genre</h2>
+                    </div>
+                    <div class="filter-item" id="genre2">
+                        <h2 class="text-xl">Genre</h2>
+                    </div>
+                    <div class="filter-item" id="platform">
+                        <h2 class="text-xl">Platform</h2>
+                    </div>
+                    <div class="filter-item" id="gamemode">
+                        <h2 class="text-xl">Game Mode</h2>
+                    </div>
+                    <div class="filter-item" id="publisher">
+                        <h2 class="text-xl">Publisher</h2>
+                    </div>
+                </div>
+            </aside>
+        </nav>
     </header>
-    <main>
+    <main class="p-4">
         <section>
-
+            <!-- Content goes here -->
         </section>
     </main>
-    <footer>
+    <footer class="p-4 bg-gray-dark text-white">
         <script src="script.js"></script>
+    </footer>
 </body>
 </html>
