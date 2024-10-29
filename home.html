@@ -1,30 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head>  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameSeek</title>
+    <!-- CSS Links in the Head -->
     <link rel="stylesheet" href="style.css">
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <header>
-        <h1>Welcome To GameSeek!</h1>
-        <h3>About Us</h3>
-        <p>A cool informative website to help you look for new releases of games and metadata about them!</p>
-        
-        
+
+<body class="bg-sky-500 dark:text-red">
+    <header class="text-center p-4 dark">
+        <h1 class="text-5xl font-extrabold text-red-500">Welcome To GameSeek!</h1>
+        <h3 class="text-4xl text-yellow-400 mt-2">About Us</h3>
+        <p class="text-green-300 mt-3 text-3xl">A cool informative website to help gamers like you look for new releases of games and metadata about them!</p>
     </header>
-    <main>
-        <section>
+    
+    <main class="flex flex-col items-center mt-8">
+        <div class="text-center">
+            <img src="images/logo.png" alt="GameSeek Logo" class="w-1/2 mx-auto mb-4">
+            <p class="nes-text is-success">Click the button below to get started!</p>
+            
+            <button type="button" 
+            class="relative text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 
+            bg-red-500 hover:bg-blue-500 active:bg-green-500 focus:ring-4 focus:outline-none 
+            focus:ring-blue-300 tansition-colors duration-300 sparkle-effect">
+            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M10.5 0C4.699 0 0 4.699 0 10.5S4.699 21 10.5 21c2.628 0 5.043-1.024 6.848-2.688l5.08 5.08a1.5 1.5 0 0 0 2.121-2.121l-5.08-5.08A10.483 10.483 0 0 0 21 10.5C21 4.699 16.301 0 10.5 0zM10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z"/>
+            </svg>
+            Search Games
+        </button>
+        
+    
+        </div>
+            <section class="icon-list">
+                <!-- controllers -->
+                <i class="nes-logo"></i>
+                <i class="nes-jp-logo"></i>
+                <i class="snes-logo"></i>
+                <i class="snes-jp-logo"></i>
+                <i class="nes-octocat animate"></i>
+                <i class="nes-smartphone"></i>
+                <i class="nes-phone"></i>
+               
+                    <i class="nes-mario"></i>
+                    <i class="nes-ash"></i>
+                    <i class="nes-pokeball"></i>
+                    <i class="nes-bulbasaur"></i>
+                    <i class="nes-charmander"></i>
+                    <i class="nes-squirtle"></i>
+                    <i class="nes-kirby"></i>
+                </section>
 
+                <!-- Balloon 'is-dark'  -->
+<section class="nes-container is-dark">
+    <section class="message-list">
+        <section class="message -left">
+          <i class="nes-bcrikko"></i>
+          <!-- Balloon -->
+          <div class="nes-balloon from-left is-dark">
+            <p>Hey, what framework and libraries were used for this website?</p>
+          </div>
         </section>
+  
+        <section class="message -right">
+          <!-- Balloon -->
+          <div class="nes-balloon from-right is-dark">
+            <p>Great question! NES framework with flowbite library (tailwindCSS) were used.</p>
+          </div>
+          <i class="nes-bcrikko"></i>
+        </section>
+      </section>
+    </section>
+  </section>
+
+
     </main>
-
-    <footer>
-        <h2>Made by Hassan, John, Anthony, Camryn</h2>
-        <script src="script.js"></script>
-
+    <footer class="text-center p-4 mt-8 text-gray-400">
+        <h2 class="nes-text is-error">Crafted by your gaming squad: Hassan, John, Anthony, and Camryn — leveling up your game discovery by a simple click!</h2>
     </footer>
+
+    <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
 </html>

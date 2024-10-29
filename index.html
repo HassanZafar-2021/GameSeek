@@ -7,6 +7,40 @@
     <title>GameSeek</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Custom styling for fonts and consistency -->
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+    </style>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'blue': '#1fb6ff',
+                        'purple': '#7e5bef',
+                        'pink': '#ff49db',
+                        'orange': '#ff7849',
+                        'green': '#13ce66',
+                        'yellow': '#ffc82c',
+                        'gray-dark': '#273444',
+                        'gray': '#8492a6',
+                        'gray-light': '#d3dce6',
+                    },
+                    fontFamily: {
+                        sans: ['Graphik', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    },
+                    spacing: {
+                        '8xl': '96rem',
+                        '9xl': '128rem',
+                    },
+                    borderRadius: {
+                        '4xl': '2rem',
+                    }
+                }
+            }
+        }
+    </script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
