@@ -1,46 +1,61 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GameSeek</title>
-    <link rel="stylesheet" href="styles.css">
     <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Custom styling for fonts and consistency -->
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
-<body>
+
+<body class="bg-gray-100 min-h-screen flex flex-col">
     <!-- Header Section -->
-    <header>
-        <h1>Game Seek</h1>
-        <p>A place to seek for games</p>
+    <header class="bg-blue-600 text-white py-6 shadow-lg">
+        <div class="container mx-auto text-center">
+            <h1 class="text-4xl font-bold">Game Seek</h1>
+            <p class="mt-2 text-lg font-light">Discover your favorite games</p>
+        </div>
     </header>
 
     <!-- Main Content Section -->
-    <main class="container">
+    <main class="flex-grow container mx-auto mt-10">
         <!-- Search Bar Section -->
-        <section class="search-bar">
-            <form id="game-search-form">
+        <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
+            <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
                 <!-- Search Input -->
-                <label for="search-input">Search for games:</label>
-                <input type="text" id="search-input" name="search" placeholder="Search" />
+                <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms"
+                    class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300"
+                    aria-label="Search for games, genres, platforms" />
+
                 <!-- Submit Button -->
-                <button type="submit">Search</button>
+                <button type="submit"
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
             </form>
         </section>
 
         <!-- Results Section -->
-        <section class="game-list">
-            <h2>Search Results</h2>
-            <div id="game-results">
+        <section class="game-list mt-10 max-w-7xl mx-auto">
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Search Results</h2>
+            <div id="game-results" class="bg-white p-6 shadow-lg rounded-lg text-gray-700">
                 <!-- Placeholder for dynamically populated game results -->
-                <p>Use the search above to find games matching your criteria.</p>
+                <p class="text-gray-500">Use the search above to find games matching your criteria.</p>
             </div>
         </section>
     </main>
 
     <!-- Footer Section -->
-    <footer>
-        <p>a footer</p>
+    <footer class="bg-blue-600 text-white text-center py-4">
+        <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
     </footer>
+
     <script src="script.js"></script>
 </body>
+
 </html>
