@@ -1,3 +1,35 @@
+// Event listener for form submission to search for games
+document.getElementById('game-search-form').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+
+    const query = document.getElementById('search-input').value.trim();
+    if (query) {
+        searchGames(query); // Perform the search using the query for names, genres, platforms
+    } else {
+        // Create modal elements
+        const modal = document.createElement('div');
+        modal.classList.add('modal', 'fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
+
+        const modalContent = document.createElement('div');
+        modalContent.classList.add('modal-content', 'bg-white', 'p-6', 'rounded-lg', 'shadow-lg');
+
+        const modalText = document.createElement('p');
+        modalText.textContent = 'Please enter a search query.';
+
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.classList.add('mt-4', 'px-4', 'py-2', 'bg-blue-500', 'text-white', 'rounded');
+        closeButton.addEventListener('click', () => {
+            document.body.removeChild(modal);
+        });
+
+        // Append elements
+        modalContent.appendChild(modalText);
+        modalContent.appendChild(closeButton);
+        modal.appendChild(modalContent);
+        document.body.appendChild(modal);
+    }
+});
 const API_KEY = '93fbde2a685d45cea6a36af991b6da2e'; // Your actual RAWG
 
 // Function to fetch games from RAWG API based on search query
