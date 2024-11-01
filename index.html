@@ -7,7 +7,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
-    <link href="../css/style.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
@@ -29,7 +28,6 @@
         <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
             <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
-                <button type="button" data-modal-target="gameModal" data-modal-toggle="gameModal" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Open Modal</button>
                 <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms" class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300" aria-label="Search for games, genres, platforms" />
                 <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
             </form>
@@ -49,6 +47,9 @@
         <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
     </footer>
 
+    <!-- Modal Trigger Button -->
+    <button data-modal-target="gameModal" data-modal-toggle="gameModal" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 fixed bottom-10 right-10">Open Modal</button>
+
     <!-- Modal Structure -->
     <div id="gameModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
         <div class="relative w-full h-full max-w-2xl md:h-auto">
@@ -57,7 +58,7 @@
                 <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
                     <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Game Comparison</h3>
                     <button type="button" data-modal-hide="gameModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20"></svg>
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                             <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
                         </svg>
                     </button>
@@ -95,16 +96,42 @@
     <script src="/js/script.js"></script>
     <script src="/js/modal.js"></script>
     <script src="./js/toggle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const colorPicker = document.getElementById('colorPicker');
+            const modalContent = document.querySelector('#gameModal .relative.bg-white');
+
+            colorPicker.addEventListener('input', () => {
+                modalContent.style.backgroundColor = colorPicker.value;
+            });
+        });
+    </script>
 </body>
 </html>
 <!-- Dark Mode Toggle Button -->
 <div class="fixed top-10 right-10 flex items-center">
     <span class="mr-2">🌞</span>
-    <label for="themeToggle" class="relative inline-flex items-center cursor-pointer" aria-label="Toggle dark mode">
-        <input type="checkbox" id="themeToggle" class="sr-only" title="Toggle dark mode">
+    <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="themeToggle" class="sr-only">
         <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700">
             <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
         </div>
     </label>
     <span class="ml-2">🌜</span>
 </div>
+
+<style>
+    .dark-mode {
+        background-color: #1a202c;
+        color: #a0aec0;
+    }
+    .dark-mode .bg-white {
+        background-color: #2d3748;
+    }
+    .dark-mode .text-gray-700 {
+        color: #a0aec0;
+    }
+    .dark-mode .text-gray-500 {
+        color: #718096;
+    }
+</style>
