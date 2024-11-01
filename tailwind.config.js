@@ -1,5 +1,5 @@
 // tailwind.config.js
-module.exports = {
+export default {
     darkMode: 'class',
     content: [
       // Add paths to your pages or components that use Flowbite and Tailwind classes
