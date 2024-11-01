@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Seek</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
+</head>
+<body class="bg-gray-100 min-h-screen flex flex-col">
+
+<!-- Modal Trigger Button -->
+<button data-modal-target="gameModal" data-modal-toggle="gameModal"
+    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition fixed bottom-10 right-10">Compare Games</button>
+
+<!-- Modal Structure -->
+<div id="gameModal" tabindex="-1" aria-hidden="true"
+    class="fixed inset-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto h-modal md:h-full bg-gray-900 bg-opacity-50 flex items-center justify-center">
+    <div class="relative w-full max-w-4xl bg-white rounded-lg shadow dark:bg-gray-800">
+        <!-- Modal header -->
+        <div class="flex items-center justify-between p-4 border-b dark:border-gray-600">
+            <h3 class="text-xl font-semibold text-gray-900 dark:text-white">
+                Game Comparison
+            </h3>
+            <button data-modal-hide="gameModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg p-1.5 dark:hover:bg-gray-600 dark:hover:text-white">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                    <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                </svg>
+            </button>
+        </div>
+        <!-- Modal body -->
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Game 1 Column -->
+            <div class="space-y-4 bg-gray-100 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-700">Game 1</h4>
+                <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail" class="w-full h-40 object-cover rounded">
+                <p class="text-gray-600">Platform: <span class="font-semibold">PC, Xbox</span></p>
+                <p class="text-gray-600">Developer: <span class="font-semibold">Developer Name</span></p>
+                <p class="text-gray-600">Price: <span class="font-semibold">$59.99</span></p>
+                <p class="text-gray-600">Release Date: <span class="font-semibold">2023-10-31</span></p>
+            </div>
+            <!-- Game 2 Column -->
+            <div class="space-y-4 bg-gray-100 p-4 rounded-lg">
+                <h4 class="text-lg font-semibold text-gray-700">Game 2</h4>
+                <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail" class="w-full h-40 object-cover rounded">
+                <p class="text-gray-600">Platform: <span class="font-semibold">PS5, PC</span></p>
+                <p class="text-gray-600">Developer: <span class="font-semibold">Another Dev</span></p>
+                <p class="text-gray-600">Price: <span class="font-semibold">$69.99</span></p>
+                <p class="text-gray-600">Release Date: <span class="font-semibold">2024-03-15</span></p>
+            </div>
+        </div>
+        <!-- Modal footer -->
+        <div class="flex justify-end p-4 border-t dark:border-gray-600">
+            <button data-modal-hide="gameModal" class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg text-sm px-4 py-2.5">Close</button>
+        </div>
+    </div>
+</div>
+<script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
