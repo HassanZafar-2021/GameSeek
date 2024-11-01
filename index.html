@@ -1,56 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Seek</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Custom styling for fonts and consistency -->
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+    <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
     </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'blue': '#1fb6ff',
-                        'purple': '#7e5bef',
-                        'pink': '#ff49db',
-                        'orange': '#ff7849',
-                        'green': '#13ce66',
-                        'yellow': '#ffc82c',
-                        'gray-dark': '#273444',
-                        'gray': '#8492a6',
-                        'gray-light': '#d3dce6',
-                    },
-                    fontFamily: {
-                        sans: ['Graphik', 'sans-serif'],
-                        serif: ['Merriweather', 'serif'],
-                    },
-                    spacing: {
-                        '8xl': '96rem',
-                        '9xl': '128rem',
-                    },
-                    borderRadius: {
-                        '4xl': '2rem',
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-100 min-h-screen flex flex-col">
-<body class="bg-gray-100 min-h-screen flex flex-col">
+    <!-- Header Section -->
     <header class="bg-blue-600 text-white py-6 shadow-lg">
         <div class="container mx-auto text-center">
             <h1 class="text-4xl font-bold">Game Seek</h1>
@@ -64,14 +28,8 @@
         <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
             <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
-                <!-- Search Input -->
-                <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms"
-                    class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300"
-                    aria-label="Search for games, genres, platforms" />
-
-                <!-- Submit Button -->
-                <button type="submit"
-                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
+                <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms" class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300" aria-label="Search for games, genres, platforms" />
+                <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
             </form>
         </section>
 
@@ -79,7 +37,6 @@
         <section class="game-list mt-10 max-w-7xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4">Search Results</h2>
             <div id="game-results" class="bg-white p-6 shadow-lg rounded-lg text-gray-700">
-                <!-- Placeholder for dynamically populated game results -->
                 <p class="text-gray-500">Use the search above to find games matching your criteria.</p>
             </div>
         </section>
@@ -90,7 +47,91 @@
         <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
     </footer>
 
-    <script src="script.js"></script>
-</body>
+    <!-- Modal Trigger Button -->
+    <button data-modal-target="gameModal" data-modal-toggle="gameModal" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 fixed bottom-10 right-10">Open Modal</button>
 
+    <!-- Modal Structure -->
+    <div id="gameModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
+        <div class="relative w-full h-full max-w-2xl md:h-auto">
+            <!-- Modal content -->
+            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
+                <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
+                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Game Comparison</h3>
+                    <button type="button" data-modal-hide="gameModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
+                        </svg>
+                    </button>
+                </div>
+                
+                <!-- Color Picker for Modal Background -->
+                <div class="p-4 text-center">
+                    <label for="colorPicker" class="text-gray-700">Select Background Color:</label>
+                    <input type="color" id="colorPicker" name="colorPicker" value="#ffffff" class="border rounded-md cursor-pointer ml-2">
+                </div>
+
+                <!-- Comparison Sections -->
+                <div class="flex justify-between p-6 space-x-4">
+                    <!-- Left Side (Game 1) -->
+                    <div id="game1" class="w-1/2 p-4 bg-gray-100 rounded-md">
+                        <h3 class="text-lg font-semibold text-gray-700">Game 1 Details</h3>
+                        <p id="game1Details" class="text-sm text-gray-600">Select a game to compare.</p>
+                    </div>
+
+                    <!-- Right Side (Game 2) -->
+                    <div id="game2" class="w-1/2 p-4 bg-gray-100 rounded-md">
+                        <h3 class="text-lg font-semibold text-gray-700">Game 2 Details</h3>
+                        <p id="game2Details" class="text-sm text-gray-600">Select a game to compare.</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
+                    <button data-modal-hide="gameModal" type="button" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+    <script src="/js/script.js"></script>
+    <script src="/js/modal.js"></script>
+    <script src="./js/toggle.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const colorPicker = document.getElementById('colorPicker');
+            const modalContent = document.querySelector('#gameModal .relative.bg-white');
+
+            colorPicker.addEventListener('input', () => {
+                modalContent.style.backgroundColor = colorPicker.value;
+            });
+        });
+    </script>
+</body>
 </html>
+<!-- Dark Mode Toggle Button -->
+<div class="fixed top-10 right-10 flex items-center">
+    <span class="mr-2">🌞</span>
+    <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
+        <input type="checkbox" id="themeToggle" class="sr-only">
+        <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700">
+            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
+        </div>
+    </label>
+    <span class="ml-2">🌜</span>
+</div>
+
+<style>
+    .dark-mode {
+        background-color: #1a202c;
+        color: #a0aec0;
+    }
+    .dark-mode .bg-white {
+        background-color: #2d3748;
+    }
+    .dark-mode .text-gray-700 {
+        color: #a0aec0;
+    }
+    .dark-mode .text-gray-500 {
+        color: #718096;
+    }
+</style>
