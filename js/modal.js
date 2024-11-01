@@ -7,13 +7,21 @@ document.addEventListener('DOMContentLoaded', function () {
     const game2Details = document.getElementById('game2Details');
 
     // Open Modal
-    openModalButton.addEventListener('click', () => {
-        modal.classList.remove('hidden');
-    });
+    if (openModalButton) {
+        openModalButton.addEventListener('click', () => {
+            modal.classList.remove('hidden');
+        });
+    }
+    
+    const modalContent = document.querySelector('#gameModal .relative.bg-white');
 
+    colorPicker.addEventListener('input', () => {
+        modalContent.style.backgroundColor = colorPicker.value;
+    });
     // Close Modal
     closeModalButtons.forEach(button => {
-        button.addEventListener('click', () => {
+        button.addEventListener('click', (event) => {
+            event.preventDefault();
             modal.classList.add('hidden');
         });
     });
