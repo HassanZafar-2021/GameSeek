@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Game Seek</title>
+    <script src="./js/modal.js"></script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
@@ -33,27 +34,87 @@
         <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-4">
             <!-- Game 1 Column -->
             <div class="space-y-4 bg-gray-100 p-4 rounded-lg">
-                <h4 class="text-lg font-semibold text-gray-700">Game 1</h4>
-                <img src="game1-thumbnail.jpg" alt="Game 1 Thumbnail" class="w-full h-40 object-cover rounded">
-                <p class="text-gray-600">Platform: <span class="font-semibold">PC, Xbox</span></p>
-                <p class="text-gray-600">Developer: <span class="font-semibold">Developer Name</span></p>
-                <p class="text-gray-600">Price: <span class="font-semibold">$59.99</span></p>
-                <p class="text-gray-600">Release Date: <span class="font-semibold">2023-10-31</span></p>
+                <label for="game1Title" class="block text-sm font-medium text-gray-700">Game 1 Title</label>
+                <input type="text" id="game1Title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game1Developer" class="block text-sm font-medium text-gray-700">Developer</label>
+                <input type="text" id="game1Developer" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game1Price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="text" id="game1Price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game1ReleaseDate" class="block text-sm font-medium text-gray-700">Release Date</label>
+                <input type="date" id="game1ReleaseDate" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game1Genre" class="block text-sm font-medium text-gray-700">Genre</label>
+                <input type="text" id="game1Genre" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
             </div>
             <!-- Game 2 Column -->
             <div class="space-y-4 bg-gray-100 p-4 rounded-lg">
-                <h4 class="text-lg font-semibold text-gray-700">Game 2</h4>
-                <img src="game2-thumbnail.jpg" alt="Game 2 Thumbnail" class="w-full h-40 object-cover rounded">
-                <p class="text-gray-600">Platform: <span class="font-semibold">PS5, PC</span></p>
-                <p class="text-gray-600">Developer: <span class="font-semibold">Another Dev</span></p>
-                <p class="text-gray-600">Price: <span class="font-semibold">$69.99</span></p>
-                <p class="text-gray-600">Release Date: <span class="font-semibold">2024-03-15</span></p>
+                <label for="game2Title" class="block text-sm font-medium text-gray-700">Game 2 Title</label>
+                <input type="text" id="game2Title" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game2Developer" class="block text-sm font-medium text-gray-700">Developer</label>
+                <input type="text" id="game2Developer" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game2Price" class="block text-sm font-medium text-gray-700">Price</label>
+                <input type="text" id="game2Price" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game2ReleaseDate" class="block text-sm font-medium text-gray-700">Release Date</label>
+                <input type="date" id="game2ReleaseDate" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
+                <label for="game2Genre" class="block text-sm font-medium text-gray-700">Genre</label>
+                <input type="text" id="game2Genre" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm">
             </div>
         </div>
         <!-- Modal footer -->
         <div class="flex justify-end p-4 border-t dark:border-gray-600">
-            <button data-modal-hide="gameModal" class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg text-sm px-4 py-2.5">Close</button>
+            <button id="compareGamesButton" class="text-white bg-blue-600 hover:bg-blue-700 rounded-lg text-sm px-4 py-2.5">Compare</button>
         </div>
+        <div id="comparisonResult" class="p-4"></div>
     </div>
 </div>
 <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const compareGamesButton = document.getElementById('compareGamesButton');
+    const comparisonResult = document.getElementById('comparisonResult');
+
+    compareGamesButton.addEventListener('click', () => {
+        const game1 = {
+            title: document.getElementById('game1Title').value,
+            developer: document.getElementById('game1Developer').value,
+            price: document.getElementById('game1Price').value,
+            releaseDate: document.getElementById('game1ReleaseDate').value,
+            genre: document.getElementById('game1Genre').value
+        };
+
+        const game2 = {
+            title: document.getElementById('game2Title').value,
+            developer: document.getElementById('game2Developer').value,
+            price: document.getElementById('game2Price').value,
+            releaseDate: document.getElementById('game2ReleaseDate').value,
+            genre: document.getElementById('game2Genre').value
+        };
+
+        displayGameComparison(game1, game2);
+    });
+
+    function displayGameComparison(game1, game2) {
+        comparisonResult.innerHTML = `
+            <div class="grid grid-cols-2 gap-4">
+                <div>
+                    <h3 class="text-lg font-bold">Game 1</h3>
+                    <p><strong>Title:</strong> ${game1.title}</p>
+                    <p><strong>Developer:</strong> ${game1.developer}</p>
+                    <p><strong>Price:</strong> ${game1.price}</p>
+                    <p><strong>Release Date:</strong> ${game1.releaseDate}</p>
+                    <p><strong>Genre:</strong> ${game1.genre}</p>
+                </div>
+                <div>
+                    <h3 class="text-lg font-bold">Game 2</h3>
+                    <p><strong>Title:</strong> ${game2.title}</p>
+                    <p><strong>Developer:</strong> ${game2.developer}</p>
+                    <p><strong>Price:</strong> ${game2.price}</p>
+                    <p><strong>Release Date:</strong> ${game2.releaseDate}</p>
+                    <p><strong>Genre:</strong> ${game2.genre}</p>
+                </div>
+            </div>
+        `;
+    }
+});
+</script>
+</body>
+</html>

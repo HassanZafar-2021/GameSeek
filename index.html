@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,16 +23,55 @@
         </div>
     </header>
 
-    <!-- Main Content Section -->
-    <main class="flex-grow container mx-auto mt-10">
-        <!-- Search Bar Section -->
-        <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
-            <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
-                <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms" class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300" aria-label="Search for games, genres, platforms" />
-                <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
-            </form>
-        </section>
+ <!-- Main Content Section -->
+<main class="flex-grow container mx-auto mt-10">
+    <!-- Search Bar Section -->
+    <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
+        <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
+
+        <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
+            <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms" 
+                   class="border border-gray-300 p-3 rounded-lg w-full sm:w-auto flex-grow focus:outline-none focus:ring focus:ring-blue-300" 
+                   aria-label="Search for games, genres, platforms" />
+            <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
+            <button type="button" id="openCompareModal" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Compare</button>
+        </form>
+    </section>
+
+    <!-- Compare Modal Structure -->
+    <div id="compareModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div class="bg-white rounded-lg p-8 max-w-4xl w-full relative">
+            <button type="button" id="closeCompareModal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">✖</button>
+            <h2 class="text-2xl font-bold mb-4 text-center">Game Comparison</h2>
+            <div class="flex gap-4">
+                <div>
+                    <label for="colorPicker">Select Color:</label>
+                    <input type="color" id="colorPicker" value="#ff0000">
+                </div>
+
+                <!-- Game 1 Section -->
+                <div class="flex-1">
+                    <input type="text" id="game1-input" placeholder="Enter Game 1" class="w-full p-2 mb-4 border rounded-lg">
+                    <div id="game1-details" class="text-center border p-4 rounded-lg"></div>
+                </div>
+                
+                <!-- Center Divider -->
+                <div class="border-r-2 h-full"></div>
+                
+                <!-- Game 2 Section -->
+                <div class="flex-1">
+                    <input type="text" id="game2-input" placeholder="Enter Game 2" class="w-full p-2 mb-4 border rounded-lg">
+                    <div id="game2-details" class="text-center border p-4 rounded-lg"></div>
+                </div>
+            </div>
+            <div class="mt-6 flex justify-between">
+                <button type="button" id="compareButton" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Compare</button>
+                <button type="button" id="clearButton" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Clear</button>
+            </div>
+        </div>
+    </div>
+
+
 
         <!-- Results Section -->
         <section class="game-list mt-10 max-w-7xl mx-auto">
@@ -47,78 +87,25 @@
         <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
     </footer>
 
-    <!-- Modal Trigger Button -->
-    <button data-modal-target="gameModal" data-modal-toggle="gameModal" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300 fixed bottom-10 right-10">Open Modal</button>
-
-    <!-- Modal Structure -->
-    <div id="gameModal" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-modal md:h-full">
-        <div class="relative w-full h-full max-w-2xl md:h-auto">
-            <!-- Modal content -->
-            <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-                <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-                    <h3 class="text-xl font-semibold text-gray-900 dark:text-white">Game Comparison</h3>
-                    <button type="button" data-modal-hide="gameModal" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center dark:hover:bg-gray-600 dark:hover:text-white">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414 1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd"></path>
-                        </svg>
-                    </button>
-                </div>
-                
-                <!-- Color Picker for Modal Background -->
-                <div class="p-4 text-center">
-                    <label for="colorPicker" class="text-gray-700">Select Background Color:</label>
-                    <input type="color" id="colorPicker" name="colorPicker" value="#ffffff" class="border rounded-md cursor-pointer ml-2">
-                </div>
-
-                <!-- Comparison Sections -->
-                <div class="flex justify-between p-6 space-x-4">
-                    <!-- Left Side (Game 1) -->
-                    <div id="game1" class="w-1/2 p-4 bg-gray-100 rounded-md">
-                        <h3 class="text-lg font-semibold text-gray-700">Game 1 Details</h3>
-                        <p id="game1Details" class="text-sm text-gray-600">Select a game to compare.</p>
-                    </div>
-
-                    <!-- Right Side (Game 2) -->
-                    <div id="game2" class="w-1/2 p-4 bg-gray-100 rounded-md">
-                        <h3 class="text-lg font-semibold text-gray-700">Game 2 Details</h3>
-                        <p id="game2Details" class="text-sm text-gray-600">Select a game to compare.</p>
-                    </div>
-                </div>
-
-                <div class="flex items-center p-6 space-x-2 border-t border-gray-200 rounded-b dark:border-gray-600">
-                    <button data-modal-hide="gameModal" type="button" class="text-white bg-blue-600 hover:bg-blue-700 font-medium rounded-lg text-sm px-5 py-2.5 text-center">Close</button>
-                </div>
+    <!-- Dark Mode Toggle Button -->
+    <div class="fixed top-10 right-10 flex items-center">
+        <span class="mr-2">🌞</span>
+        <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
+            <input type="checkbox" id="themeToggle" class="sr-only" title="Toggle dark mode">
+            <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700" aria-labelledby="themeToggle">
+                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
             </div>
-        </div>
+        </label>
+        <span class="ml-2">🌜</span>
     </div>
 
+    <!-- JavaScript -->
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="/js/script.js"></script>
     <script src="/js/modal.js"></script>
     <script src="./js/toggle.js"></script>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const colorPicker = document.getElementById('colorPicker');
-            const modalContent = document.querySelector('#gameModal .relative.bg-white');
-
-            colorPicker.addEventListener('input', () => {
-                modalContent.style.backgroundColor = colorPicker.value;
-            });
-        });
-    </script>
 </body>
 </html>
-<!-- Dark Mode Toggle Button -->
-<div class="fixed top-10 right-10 flex items-center">
-    <span class="mr-2">🌞</span>
-    <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
-        <input type="checkbox" id="themeToggle" class="sr-only" title="Toggle dark mode">
-        <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700" aria-labelledby="themeToggle">
-            <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-        </div>
-    </label>
-    <span class="ml-2">🌜</span>
-</div>
 
 <style>
     .dark-mode {
@@ -134,4 +121,13 @@
     .dark-mode .text-gray-500 {
         color: #718096;
     }
+    .close-button {
+    position: absolute;
+    top: 10px; /* Adjust as needed */
+    right: 10px; /* Adjust as needed */
+    font-size: 24px; /* Size of the X */
+    cursor: pointer; /* Changes the cursor to pointer */
+    color: #000; /* Color of the X */
+}
+
 </style>
