@@ -144,6 +144,24 @@
         </label>
         <span class="ml-2">🌜</span>
     </div>
+    <style>
+        @media screen and (max-width: 768px) {
+            header.bg-blue-600 { /* Adjusted specificity */
+                background-color: rgb(7, 185, 255); /* Change header color */
+            }
+            
+            .game-result {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        
+        
+    </style>
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
