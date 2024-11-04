@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Seek</title>
+    <title>GameSeek - Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
@@ -45,16 +45,30 @@
 <body class="bg-gray-100 min-h-screen flex flex-col">
     <!-- Header Section -->
     <header class="bg-blue-600 text-white py-6 shadow-lg">
-        <div class="container mx-auto text-center">
-            <h1 class="text-4xl font-bold">Game Seek</h1>
-            <p class="mt-2 text-lg font-light">Discover your favorite games</p>
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Back to Home Button -->
+            <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">
+                Back to Home
+            </button>
+
+            <!-- Centered Title and Subtitle -->
+            <div class="text-center flex-1"> <!-- Flex-1 allows centering with space distribution -->
+                <div class="flex justify-center">
+                    <h1 class="text-4xl font-bold">
+                        <span class="text-lime-500">Ga</span><span class="text-yellow-500">me</span><span class="text-red-500">Se</span><span class="text-cyan-500">ek</span>
+                    </h1>
+                </div>
+                <p class="mt-2 text-lg font-light">Discover your favorite games</p>
+            </div>
         </div>
     </header>
+</body>
+
 
     <!-- Main Content Section -->
     <main class="flex-grow container mx-auto mt-10">
         <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Search for Games</h2>
+            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Enter or speak the game title</h2>
         
             <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
                 <div class="flex items-center w-full sm:w-auto flex-grow">
@@ -116,11 +130,18 @@
     </main>
 
     <!-- Previously Searched Games Sidebar -->
-    <aside class="previous-searches-sidebar" id="previous-searches">
+    <aside class="previous-searches-sidebar transition-colors duration-500 bg-white text-lg font-semibold text-gray-700 mb-2 absolute right-0 top-1/2 transform -translate-y-[65%]" id="previous-searches">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Recently Searched Games</h3>
-        <p class="text-sm text-gray-500 mb-2">The last three games you searched will appear here.</p>
+        <p class="text-sm text-green-500 mb-2">The last three games you searched will appear here.</p>
         <!-- JavaScript will populate this section with the last 3 searched games -->
     </aside>
+    
+    
+    
+    
+    
+    
+    
 
     <!-- Footer Section -->
     <footer class="bg-blue-600 text-white text-center py-4 mt-auto">
@@ -138,6 +159,24 @@
         </label>
         <span class="ml-2">🌜</span>
     </div>
+    <style>
+        @media screen and (max-width: 768px) {
+            header.bg-blue-600 { /* Adjusted specificity */
+                background-color: rgb(7, 185, 255); /* Change header color */
+            }
+            
+            .game-result {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                flex-wrap: wrap;
+                justify-content: center;
+                align-items: center;
+            }
+        }
+        
+        
+    </style>
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
@@ -145,5 +184,6 @@
     <script src="/js/modal.js"></script>
     <script src="/js/toggle.js"></script>
     <script src="/js/voice.js"></script>
+    <script src="/js/home.js"></script>
 </body>
 </html>
