@@ -11,7 +11,6 @@ async function fetchGames(query) {
 // Function to save up to the last 3 searched games to local storage
 function saveSearchedGame(gameData) {
     const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
-    // Check if the game is already stored to avoid duplicates
     const isAlreadyStored = previousSearches.some(game => game.id === gameData.id);
 
     if (!isAlreadyStored) {
@@ -32,17 +31,15 @@ function displayPreviousSearches() {
     const previousSearchesContainer = document.getElementById('previous-searches');
     previousSearchesContainer.innerHTML = ''; // Clear previous content
 
-    // Add a title to the sidebar
     const title = document.createElement('h3');
     title.classList.add('text-lg', 'font-semibold', 'text-gray-700', 'mb-2');
     title.textContent = "Recently Searched Games";
     previousSearchesContainer.appendChild(title);
 
-    // Add each of the last 3 games to the sidebar
     previousSearches.forEach(game => {
         const gameElement = document.createElement('div');
         gameElement.classList.add('game-item', 'bg-gray-200', 'rounded', 'p-2', 'mb-2');
-        gameElement.innerHTML = `<strong>${game.name}</strong> - Released: ${game.released}`;
+        gameElement.innerHTML = `<strong>${game.name}</strong> - Released: ${game.released || "N/A"}`;
         previousSearchesContainer.appendChild(gameElement);
     });
 }
@@ -64,14 +61,13 @@ async function searchGames(query) {
                 const listItem = document.createElement('div');
                 listItem.classList.add('game-item', 'bg-white', 'rounded-lg', 'shadow', 'p-4');
                 
-                // Display game details along with the image
                 listItem.innerHTML = `
-                    <img src="${game.background_image}" alt="${game.name}" class="w-full mb-4 rounded-lg h-48 object-cover">
+                    <img src="${game.background_image || 'https://via.placeholder.com/150'}" alt="${game.name}" class="w-full mb-4 rounded-lg h-48 object-cover">
                     <h3 class="text-lg font-bold">${game.name}</h3>
-                    <p class="text-sm">Release Date: ${game.released}</p>
-                    <p class="text-sm">Platforms: ${game.platforms.map(p => p.platform.name).join(', ')}</p>
-                    <p class="text-sm">Genres: ${game.genres.map(g => g.name).join(', ')}</p>
-                    <p class="text-sm">Publisher: ${game.publishers?.map(p => p.name).join(', ') || 'N/A'}</p>
+                    <p class="text-sm">Release Date: ${game.released || 'N/A'}</p>
+                    <p class="text-sm">Platforms: ${game.platforms ? game.platforms.map(p => p.platform.name).join(', ') : 'N/A'}</p>
+                    <p class="text-sm">Genres: ${game.genres ? game.genres.map(g => g.name).join(', ') : 'N/A'}</p>
+                    <p class="text-sm">Publisher: ${game.publishers && game.publishers.length ? game.publishers.map(p => p.name).join(', ') : 'N/A'}</p>
                 `;
                 gridContainer.appendChild(listItem);
             });
@@ -80,6 +76,7 @@ async function searchGames(query) {
 
             // Save only the first game to Local Storage for "Previously Searched Games"
             saveSearchedGame(games[0]);
+            
         } else {
             resultsContainer.innerHTML = '<p>No games found matching your search criteria.</p>';
         }
@@ -88,6 +85,16 @@ async function searchGames(query) {
         resultsContainer.innerHTML = '<p>Failed to load games. Please try again later.</p>';
     }
 }
+
+// Color alternation for aside element
+const aside = document.getElementById("previous-searches");
+const colors = ["#ffffff", "#fef3c7"]; // white and light yellow
+let colorIndex = 0;
+
+setInterval(() => {
+    aside.style.backgroundColor = colors[colorIndex];
+    colorIndex = (colorIndex + 1) % colors.length;
+}, 1000); // Changes every 2 seconds
 
 // Display previously searched games on page load
 document.addEventListener('DOMContentLoaded', displayPreviousSearches);
