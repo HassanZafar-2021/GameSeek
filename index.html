@@ -10,6 +10,21 @@
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
         body { font-family: 'Inter', sans-serif; }
+
+        /* Style for the sidebar */
+        .previous-searches-sidebar {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            width: 250px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 1rem;
+            background-color: #f3f4f6; /* Light gray background */
+            border: 1px solid #d1d5db; /* Border color */
+            border-radius: 0.5rem;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -43,44 +58,6 @@
                 <button type="button" id="openCompareModal" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Compare</button>
             </form>
         </section>
-        
-        
-    </main>
-    
-    
-    
-        <!-- Compare Modal Structure -->
-        <div id="compareModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="bg-white rounded-lg p-8 max-w-4xl w-full relative">
-                <button type="button" id="closeCompareModal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">✖</button>
-                <h2 class="text-2xl font-bold mb-4 text-center">Game Comparison</h2>
-                <div class="flex gap-4">
-                    <div>
-                        <label for="colorPicker">Select Color:</label>
-                        <input type="color" id="colorPicker" value="#ff0000">
-                    </div>
-
-                    <!-- Game 1 Section -->
-                    <div class="flex-1">
-                        <input type="text" id="game1-input" placeholder="Enter Game 1" class="w-full p-2 mb-4 border rounded-lg">
-                        <div id="game1-details" class="text-center border p-4 rounded-lg"></div>
-                    </div>
-                    
-                    <!-- Center Divider -->
-                    <div class="border-r-2 h-full"></div>
-                    
-                    <!-- Game 2 Section -->
-                    <div class="flex-1">
-                        <input type="text" id="game2-input" placeholder="Enter Game 2" class="w-full p-2 mb-4 border rounded-lg">
-                        <div id="game2-details" class="text-center border p-4 rounded-lg"></div>
-                    </div>
-                </div>
-                <div class="mt-6 flex justify-between">
-                    <button type="button" id="compareButton" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Compare</button>
-                    <button type="button" id="clearButton" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Clear</button>
-                </div>
-            </div>
-        </div>
 
         <!-- Results Section -->
         <section class="game-list mt-10 max-w-7xl mx-auto">
@@ -89,23 +66,18 @@
                 <p class="text-gray-500">Use the search above to find games matching your criteria.</p>
             </div>
         </section>
+    </main>
+
+    <!-- Previously Searched Games Sidebar -->
+    <aside class="previous-searches-sidebar" id="previous-searches">
+        <h3 class="text-lg font-semibold text-gray-700 mb-2">Previously Searched Game</h3>
+        <!-- JavaScript will populate this section -->
+    </aside>
 
     <!-- Footer Section -->
-    <footer class="bg-blue-600 text-white text-center py-4">
+    <footer class="bg-blue-600 text-white text-center py-4 mt-auto">
         <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
     </footer>
-
-    <!-- Dark Mode Toggle Button -->
-    <div class="fixed top-10 right-10 flex items-center">
-        <span class="mr-2">🌞</span>
-        <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="themeToggle" class="sr-only" title="Toggle dark mode">
-            <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700" aria-labelledby="themeToggle">
-                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-            </div>
-        </label>
-        <span class="ml-2">🌜</span>
-    </div>
 
     <!-- JavaScript -->
     <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
@@ -115,27 +87,3 @@
     <script src="./js/voice.js"></script>
 </body>
 </html>
-
-<style>
-    .dark-mode {
-        background-color: #1a202c;
-        color: #a0aec0;
-    }
-    .dark-mode .bg-white {
-        background-color: #2d3748;
-    }
-    .dark-mode .text-gray-700 {
-        color: #a0aec0;
-    }
-    .dark-mode .text-gray-500 {
-        color: #718096;
-    }
-    .close-button {
-        position: absolute;
-        top: 10px; /* Adjust as needed */
-        right: 10px; /* Adjust as needed */
-        font-size: 24px; /* Size of the X */
-        cursor: pointer; /* Changes the cursor to pointer */
-        color: #000; /* Color of the X */
-    }
-</style>

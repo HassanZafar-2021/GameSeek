@@ -1,17 +1,49 @@
-const API_KEY = '93fbde2a685d45cea6a36af991b6da2e'; // Your actual RAWG API Key
+const API_KEY = '93fbde2a685d45cea6a36af991b6da2e'; // Your RAWG API Key
 
 // Function to fetch games from RAWG API based on search query
 async function fetchGames(query) {
-    const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${query}&page_size=20`; // Limit results to 20
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&search=${query}&page_size=20`;
     const response = await fetch(url);
     const data = await response.json();
-    return data.results; // Returns the array of games
+    return data.results;
+}
+
+// Function to save only the first searched game data to local storage
+function saveSearchedGame(gameData) {
+    const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
+    // Check if the game is already stored to avoid duplicates
+    const isAlreadyStored = previousSearches.some(game => game.id === gameData.id);
+
+    if (!isAlreadyStored) {
+        previousSearches.push(gameData);
+    }
+
+    // Limit storage to only the most recent game
+    if (previousSearches.length > 1) {
+        previousSearches.shift();
+    }
+
+    localStorage.setItem('previousSearches', JSON.stringify(previousSearches));
+}
+
+// Function to display previously searched games
+function displayPreviousSearches() {
+    const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
+    const previousSearchesContainer = document.getElementById('previous-searches');
+    previousSearchesContainer.innerHTML = ''; // Clear previous content
+
+    previousSearches.forEach(game => {
+        const gameElement = document.createElement('div');
+        gameElement.classList.add('game-item', 'bg-gray-200', 'rounded', 'p-2', 'mb-2');
+        gameElement.innerHTML = `<strong>${game.name}</strong> - Released: ${game.released}`;
+        previousSearchesContainer.appendChild(gameElement);
+    });
 }
 
 // Function to handle game search and display results
 async function searchGames(query) {
     const resultsContainer = document.getElementById('game-results');
-    resultsContainer.innerHTML = '<p>Loading...</p>'; // Show loading message
+    resultsContainer.innerHTML = '<p>Loading...</p>';
 
     try {
         const games = await fetchGames(query);
@@ -38,6 +70,9 @@ async function searchGames(query) {
             });
 
             resultsContainer.appendChild(gridContainer);
+
+            // Save only the first game to Local Storage for "Previously Searched Games"
+            saveSearchedGame(games[0]);
         } else {
             resultsContainer.innerHTML = '<p>No games found matching your search criteria.</p>';
         }
@@ -47,37 +82,15 @@ async function searchGames(query) {
     }
 }
 
+// Display previously searched game on page load
+document.addEventListener('DOMContentLoaded', displayPreviousSearches);
+
 // Event listener for form submission to search for games
 document.getElementById('game-search-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
     const query = document.getElementById('search-input').value.trim();
     if (query) {
-        searchGames(query); // Perform the search using the query for names, genres, platforms
-    } else {
-        // Check if a modal already exists to prevent duplicates
-        if (!document.querySelector('.modal')) {
-            const modal = document.createElement('div');
-            modal.classList.add('modal', 'fixed', 'inset-0', 'flex', 'items-center', 'justify-center', 'bg-black', 'bg-opacity-50');
-
-            const modalContent = document.createElement('div');
-            modalContent.classList.add('modal-content', 'bg-white', 'p-6', 'rounded-lg', 'shadow-lg');
-
-            const modalText = document.createElement('p');
-            modalText.textContent = 'Please enter a search query.';
-
-            const closeButton = document.createElement('button');
-            closeButton.textContent = 'Close';
-            closeButton.classList.add('mt-4', 'px-4', 'py-2', 'bg-blue-500', 'text-white', 'rounded');
-            closeButton.addEventListener('click', () => {
-                document.body.removeChild(modal);
-            });
-
-            // Append elements
-            modalContent.appendChild(modalText);
-            modalContent.appendChild(closeButton);
-            modal.appendChild(modalContent);
-            document.body.appendChild(modal);
-        }
+        searchGames(query); // Perform the search and save only the first result
     }
 });
