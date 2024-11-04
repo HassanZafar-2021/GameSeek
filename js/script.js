@@ -8,7 +8,7 @@ async function fetchGames(query) {
     return data.results;
 }
 
-// Function to save only the first searched game data to local storage
+// Function to save up to the last 3 searched games to local storage
 function saveSearchedGame(gameData) {
     const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
     // Check if the game is already stored to avoid duplicates
@@ -18,20 +18,27 @@ function saveSearchedGame(gameData) {
         previousSearches.push(gameData);
     }
 
-    // Limit storage to only the most recent game
-    if (previousSearches.length > 1) {
+    // Limit storage to the last 3 searches
+    if (previousSearches.length > 3) {
         previousSearches.shift();
     }
 
     localStorage.setItem('previousSearches', JSON.stringify(previousSearches));
 }
 
-// Function to display previously searched games
+// Function to display up to 3 previously searched games
 function displayPreviousSearches() {
     const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
     const previousSearchesContainer = document.getElementById('previous-searches');
     previousSearchesContainer.innerHTML = ''; // Clear previous content
 
+    // Add a title to the sidebar
+    const title = document.createElement('h3');
+    title.classList.add('text-lg', 'font-semibold', 'text-gray-700', 'mb-2');
+    title.textContent = "Recently Searched Games";
+    previousSearchesContainer.appendChild(title);
+
+    // Add each of the last 3 games to the sidebar
     previousSearches.forEach(game => {
         const gameElement = document.createElement('div');
         gameElement.classList.add('game-item', 'bg-gray-200', 'rounded', 'p-2', 'mb-2');
@@ -82,7 +89,7 @@ async function searchGames(query) {
     }
 }
 
-// Display previously searched game on page load
+// Display previously searched games on page load
 document.addEventListener('DOMContentLoaded', displayPreviousSearches);
 
 // Event listener for form submission to search for games
