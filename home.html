@@ -14,7 +14,7 @@
 <body class="bg-sky-600 dark:text-red">
     <header class="text-center p-4 dark">
         <h1 class="text-5xl font-extrabold text-red-500">🎮<span class="underline">Welcome To GameSeek!</span>👾</h1>
-        <h3 class="text-4xl text-yellow-400 mt-2">About Us</h3>
+        <h3 class="text-4xl text-yellow-400 mt-2">⭐💫About Us💫⭐</h3>
         <p class="text-green-200 mt-3 text-3xl">A cool informative website to help gamers like you look for new releases of games and metadata about them!</p>
     </header>
     
@@ -91,9 +91,46 @@
         <section class="message -right">
           <!-- Balloon -->
           <div class="nes-balloon from-right is-dark">
-            <p>Great question! NES framework with flowbite library (Tailwind CSS) were used.
-              Click the GitHub logo to see project repo <a href="https://github.com/HassanZafar-2021/GameSeek" title="GitHub Repository"><i class="nes-icon github is-large" aria-hidden="true"></i><span class="sr-only">GitHub Repository</span></a>
+            <p class="text-white-500 dark:text-gray-400">
+              Great question! NES framework with the Flowbite library (Tailwind CSS) were used.
+              Hover over the GitHub logo to see the project repo 
+              <a href="https://github.com/HassanZafar-2021/GameSeek" 
+                 title="GitHub Repository" 
+                 data-popover-target="popover-github"
+                 class="text-blue-600 underline dark:text-blue-500 hover:no-underline"
+                 target="_blank">
+                <i class="nes-icon github is-large" aria-hidden="true"></i>
+                <span class="sr-only">GitHub Repository</span>
+              </a>
             </p>
+            
+            <div 
+                data-popover 
+                id="popover-github" 
+                role="tooltip" 
+                class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600"
+            >
+                <div class="grid grid-cols-5">
+                    <div class="col-span-3 p-3">
+                        <div class="space-y-2">
+                            <h3 class="font-semibold text-gray-900 dark:text-white">GitHub Repository</h3>
+                            <p>Check out our game discovery project repo on GitHub for more details!</p>
+                            <a href="https://github.com/HassanZafar-2021/GameSeek"
+                               class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline" 
+                               target="_blank">
+                              View Repo
+                              <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
+                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 9l4-4-4-4"/>
+                              </svg>
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Replace the image source with your desired image -->
+                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="h-full col-span-2" alt="GitHub Logo" />
+                </div>
+                <div data-popper-arrow></div>
+            </div>
+            
           </div>
           <i class="nes-bcrikko"></i>
         </section>
@@ -104,8 +141,15 @@
 
     </main>
     <footer class="text-center p-4 mt-8 text-gray-400">
-        <h1 class="nes-text is-error text-2xl text-red-700">Crafted by your gaming squad: Hassan, John, Anthony, and Camryn — leveling up your game discovery by a simple click!</h1>
+        <h1 class="nes-text is-error text-2xl text-red-700">
+          Crafted by your gaming squad: 
+          <span class="font-bold text-red-600">Hassan</span>, 
+          <span class="font-bold text-red-600">John</span>, 
+          <span class="font-bold text-red-600">Anthony</span>, and 
+          <span class="font-bold text-red-600">Camryn</span> — leveling up your game discovery by a simple click!
+        </h1>
     </footer>
+    <!--:D-->
 
     <script src="./js/script.js"></script>
     <script src="./js/home.js"></script>
