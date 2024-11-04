@@ -23,9 +23,10 @@ function saveSearchedGame(gameData) {
     }
 
     localStorage.setItem('previousSearches', JSON.stringify(previousSearches));
+    displayPreviousSearches();  // Update display immediately after saving
 }
 
-// Function to display up to 3 previously searched games
+// Function to display up to 3 previously searched games with alternating colors
 function displayPreviousSearches() {
     const previousSearches = JSON.parse(localStorage.getItem('previousSearches')) || [];
     const previousSearchesContainer = document.getElementById('previous-searches');
@@ -36,12 +37,22 @@ function displayPreviousSearches() {
     title.textContent = "Recently Searched Games";
     previousSearchesContainer.appendChild(title);
 
-    previousSearches.forEach(game => {
+    const colors = ["#FFCCCB", "#ADD8E6", "#90EE90"]; // Light red, sky blue, light green
+
+    previousSearches.forEach((game, index) => {
         const gameElement = document.createElement('div');
-        gameElement.classList.add('game-item', 'bg-gray-200', 'rounded', 'p-2', 'mb-2');
+        gameElement.classList.add('game-item', 'rounded', 'p-2', 'mb-2');
+        gameElement.style.backgroundColor = colors[index % colors.length]; // Apply alternating colors
         gameElement.innerHTML = `<strong>${game.name}</strong> - Released: ${game.released || "N/A"}`;
         previousSearchesContainer.appendChild(gameElement);
     });
+
+    // Clear Button
+    const clearButton = document.createElement('button');
+    clearButton.textContent = "Clear Search History";
+    clearButton.classList.add('bg-red-500', 'text-white', 'py-1', 'px-3', 'rounded', 'mt-2');
+    clearButton.addEventListener('click', clearSearchHistory);
+    previousSearchesContainer.appendChild(clearButton);
 }
 
 // Function to handle game search and display results
@@ -57,10 +68,13 @@ async function searchGames(query) {
             const gridContainer = document.createElement('div');
             gridContainer.classList.add('grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-6');
 
-            games.forEach(game => {
+            const colors = ["#FFCCCB", "#ADD8E6", "#90EE90"]; // Light red, sky blue, light green
+
+            games.forEach((game, index) => {
                 const listItem = document.createElement('div');
-                listItem.classList.add('game-item', 'bg-white', 'rounded-lg', 'shadow', 'p-4');
-                
+                listItem.classList.add('game-item', 'rounded-lg', 'shadow', 'p-4');
+                listItem.style.backgroundColor = colors[index % colors.length]; // Apply alternating colors
+
                 listItem.innerHTML = `
                     <img src="${game.background_image || 'https://via.placeholder.com/150'}" alt="${game.name}" class="w-full mb-4 rounded-lg h-48 object-cover">
                     <h3 class="text-lg font-bold">${game.name}</h3>
@@ -86,15 +100,11 @@ async function searchGames(query) {
     }
 }
 
-// Color alternation for aside element
-const aside = document.getElementById("previous-searches");
-const colors = ["#ffffff", "#fef3c7"]; // white and light yellow
-let colorIndex = 0;
-
-setInterval(() => {
-    aside.style.backgroundColor = colors[colorIndex];
-    colorIndex = (colorIndex + 1) % colors.length;
-}, 1000); // Changes every 2 seconds
+// Clear search history function
+function clearSearchHistory() {
+    localStorage.removeItem('previousSearches'); // Clear local storage
+    displayPreviousSearches(); // Refresh display
+}
 
 // Display previously searched games on page load
 document.addEventListener('DOMContentLoaded', displayPreviousSearches);
@@ -108,3 +118,13 @@ document.getElementById('game-search-form').addEventListener('submit', function(
         searchGames(query); // Perform the search and save only the first result
     }
 });
+// Color alternation for aside element (white to post-it note yellow)
+const aside = document.getElementById("previous-searches");
+const asideColors = ["#ffffff", "#fef3c7"]; // white and light yellow (post-it note color)
+let asideColorIndex = 0;
+
+setInterval(() => {
+    aside.style.backgroundColor = asideColors[asideColorIndex];
+    asideColorIndex = (asideColorIndex + 1) % asideColors.length;
+}, 1000); // Changes every 1 second
+
