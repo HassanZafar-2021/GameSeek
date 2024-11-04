@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Game Seek</title>
+    <title>GameSeek - Search</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
     <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
@@ -44,11 +44,20 @@
 
 <body class="bg-gray-100 min-h-screen flex flex-col">
     <!-- Header Section -->
-    <header class="bg-blue-600 text-white py-6 shadow-lg flex items-center">
-        <div class="container mx-auto flex items-center">
-            <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">Back to Home</button>
-            <div class="flex-1 text-center mx-4"> <!-- Added mx-4 for horizontal margin -->
-                <h1 class="text-4xl font-bold">Game Seek</h1>
+    <header class="bg-blue-600 text-white py-6 shadow-lg">
+        <div class="container mx-auto flex items-center justify-between">
+            <!-- Back to Home Button -->
+            <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">
+                Back to Home
+            </button>
+
+            <!-- Centered Title and Subtitle -->
+            <div class="text-center flex-1"> <!-- Flex-1 allows centering with space distribution -->
+                <div class="flex justify-center">
+                    <h1 class="text-4xl font-bold">
+                        <span class="text-lime-500">Ga</span><span class="text-yellow-500">me</span><span class="text-red-500">Se</span><span class="text-cyan-500">ek</span>
+                    </h1>
+                </div>
                 <p class="mt-2 text-lg font-light">Discover your favorite games</p>
             </div>
         </div>
