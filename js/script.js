@@ -124,7 +124,7 @@ async function fetchDevelopers() {
     const data = await response.json();
     return data.results; 
 }
-console.log(fetchDevelopers()); 
+ 
 
 
 async function fetchGames2024() {
@@ -135,7 +135,7 @@ async function fetchGames2024() {
     return data.results; 
 }
 
-console.log(fetchGames2024());
+
 
 
 async function fetchGamesByGenre(genre) {
@@ -146,7 +146,7 @@ async function fetchGamesByGenre(genre) {
     return data.results; 
 }
 
-console.log(fetchGamesByGenre('action'));
+
 
 
 
@@ -158,16 +158,14 @@ async function fetchGamesByPlatform(platform) {
     return data.results; 
 }
 
- 
+//function to fetch games released in the last 30 days
 async function fetchGamesLast30() {
-    const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-10-04,2024-11-04&page_size=20`; 
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-10-05,2024-11-04&page_size=20`;
 
     const response = await fetch(url);
     const data = await response.json();
-    return data.results; 
+    return data.results;
 }
-
-console.log(fetchGamesLast30());
 
 
 async function fetchGamesCurrentMonth() {
@@ -457,7 +455,7 @@ async function displayGamesMobile() {
 document.getElementById('mobile').addEventListener('click', displayGamesMobile);
 
 
-//function to display games released in 2024
+
 async function displayGames2024() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -500,7 +498,7 @@ async function displayGames2024() {
 
 document.getElementById('this-year').addEventListener('click', displayGames2024);
 
-//function to display games released in the last 30 days
+
 async function displayGamesLast30() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -543,7 +541,7 @@ async function displayGamesLast30() {
 
 document.getElementById('last-30').addEventListener('click', displayGamesLast30);
 
-//function to display games released in the current month
+
 async function displayGamesCurrentMonth() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -586,7 +584,7 @@ async function displayGamesCurrentMonth() {
 
 document.getElementById('this-month').addEventListener('click', displayGamesCurrentMonth);
 
-//function to display games released in the current week
+
 async function displayGamesCurrentWeek() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -629,7 +627,7 @@ async function displayGamesCurrentWeek() {
 
 document.getElementById('this-week').addEventListener('click', displayGamesCurrentWeek);
 
-//function to display action games
+
 async function displayActionGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -672,7 +670,7 @@ async function displayActionGames() {
 
 document.getElementById('action').addEventListener('click', displayActionGames);
 
-//function to display adventure games
+
 async function displayAdventureGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -715,7 +713,7 @@ async function displayAdventureGames() {
 
 document.getElementById('adventure').addEventListener('click', displayAdventureGames);
 
-//function to display rpg games
+
 async function displayRPGGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -758,7 +756,7 @@ async function displayRPGGames() {
 
 document.getElementById('rpg').addEventListener('click', displayRPGGames);
 
-//function to display shooter games
+
 async function displayShooterGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -801,7 +799,7 @@ async function displayShooterGames() {
 
 document.getElementById('shooter').addEventListener('click', displayShooterGames);
 
-//function to display strategy games
+
 async function displayStrategyGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -844,7 +842,7 @@ async function displayStrategyGames() {
 
 document.getElementById('strategy').addEventListener('click', displayStrategyGames);
 
-//function to display sports games
+
 async function displaySportsGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -887,7 +885,7 @@ async function displaySportsGames() {
 
 document.getElementById('sports').addEventListener('click', displaySportsGames);
 
-//function to display puzzle games
+
 async function displayPuzzleGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -930,7 +928,7 @@ async function displayPuzzleGames() {
 
 document.getElementById('puzzle').addEventListener('click', displayPuzzleGames);
 
-//function to display racing games
+
 async function displayRacingGames() {
     const resultsContainer = document.getElementById('game-results');
     
@@ -974,4 +972,54 @@ async function displayRacingGames() {
 document.getElementById('racing').addEventListener('click', displayRacingGames);
 
 
-//function to move nav to under header under 
+
+async function displayGamesNext30() {
+    const resultsContainer = document.getElementById('game-results');
+    
+    resultsContainer.innerHTML = '<p>Loading...</p>'; 
+
+    try {
+        const games = await fetchGamesNext30(); 
+
+        if (games.length > 0) {
+            resultsContainer.innerHTML = ''; 
+
+            const gridContainer = document.createElement('div');
+            gridContainer.classList.add('grid', 'grid-cols-1', 'sm:grid-cols-2', 'md:grid-cols-3', 'lg:grid-cols-4', 'gap-6');
+
+            games.forEach(game => {
+                const listItem = document.createElement('div');
+                listItem.classList.add('game-item', 'bg-white', 'rounded-lg', 'shadow', 'p-4');
+
+                
+                listItem.innerHTML = `
+                    <img src="${game.background_image}" alt="${game.name}" class="w-full mb-4 rounded-lg h-48 object-cover">
+                    <h3 class="text-lg font-bold">${game.name}</h3>
+                    <p class="text-sm">Release Date: ${game.released}</p>
+                    <p class="text-sm">Platforms: ${game.platforms.map(p => p.platform.name).join(', ')}</p>
+                    <p class="text-sm">Genres: ${game.genres.map(g => g.name).join(', ')}</p>
+                    <p class="text-sm">Publisher: ${game.publishers?.map(p => p.name).join(', ') || 'N/A'}</p>
+                `;
+                gridContainer.appendChild(listItem);
+            });
+
+            resultsContainer.appendChild(gridContainer);
+        } else {
+            resultsContainer.innerHTML = '<p>No games found for this period.</p>';
+        }
+    } catch (error) {
+        console.error(error);
+        resultsContainer.innerHTML = '<p>Failed to load games. Please try again later.</p>';
+    }
+}
+
+//function to fetch games released in the next 30 days
+async function fetchGamesNext30() {
+    const url = `https://api.rawg.io/api/games?key=${API_KEY}&dates=2024-11-04,2024-12-04&page_size=20`; 
+
+    const response = await fetch(url);
+    const data = await response.json();
+    return data.results; 
+}
+
+document.getElementById('next-30').addEventListener('click', displayGamesNext30);
