@@ -67,6 +67,50 @@
 
     <!-- Main Content Section -->
     <main class="flex-grow container mx-auto mt-10">
+
+        <!-- Aside Section made by Cam -->
+        <aside id="discover" class="bg-white p-2 shadow-lg rounded-lg max-w-xl mx-auto flex-col my-4">
+           
+            <div id ='genre'>
+                <h3 class ="font-semibold text-2xl ">Genre:</h3>
+                <ul id="genre-type" class="p-1 font-semibold md:inline-flex lg:inline-flex">
+                    <li><button class= 'pr-1' id="action">Action</button></li>
+                    <li><button class= 'pr-1' id="adventure">Adventure</button></li>
+                    <li><button class= 'pr-1'id="rpg">RPG</button></li>
+                    <li><button class= 'pr-1'id="shooter">Shooter</button></li>
+                    <li><button class= 'pr-1'id="strategy">Strategy</button></li>
+                    <li><button class= 'pr-1'id="sports">Sports</button></li>
+                    <li><button class= 'pr-1'id="puzzle">Puzzle</button></li>
+                    <li><button id="racing">Racing</button></li>
+            </div>
+
+            <div id="platform">
+              <h3 class ="font-semibold text-2xl  p-1">Platform:</h3>
+                <ul id="platform-type" class="p-1 font-semibold md:flex lg:flex">
+                  <li><button class= 'pr-1'id="playstation">Playstation</button></li>
+                  <li><button class= 'pr-1'id="xbox">Xbox</button></li>
+                  <li><button class= 'pr-1'id="pc">PC</button></li>
+                  <li><button class= 'pr-1'id="nintendo">Nintendo</button></li>
+                   <li><button class= 'pr-1'id="mobile">Mobile</button></li>
+                </ul>
+            </div>
+
+            <div id="release">
+                <h3 class ="font-semibold text-2xl p-1">Releases:</h3>
+                <ul class="font-semibold md:flex lg:flex">
+                    <li><button class= 'pr-1' id="this-year">This Year</button></li>
+                    <li><button class= 'pr-1'id="this-month">This Month</button></li>
+                    <li><button class= 'pr-1'id="this-week">This Week</button></li>
+                    <li><button class= 'pr-1'id="last-30">Last 30 Days</button></li>
+                    <li><button class= 'pr-1'id="next-30">Next 30 Days</button></li>
+                </ul>
+            </div>
+
+            <div>
+                 <h3 class ="font-semibold text-2xl  p-1">Developers:</h3>
+                 <button id="developers" class="font-semibold p-1">Click Here</button>
+            </div>
+        </aside>
         <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Enter or speak the game title</h2>
         
@@ -128,6 +172,9 @@
             </div>
         </section>
     </main>
+    
+    
+
 
     <!-- Previously Searched Games Sidebar -->
     <aside class="previous-searches-sidebar transition-colors duration-500 bg-white text-lg font-semibold text-gray-700 mb-2 absolute right-0 top-1/2 transform -translate-y-[65%]" id="previous-searches">
