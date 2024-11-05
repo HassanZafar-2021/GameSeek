@@ -47,12 +47,13 @@ Backend: RAWG API for game data
 GameSeek was developed by:
 
 Anthony McElrath
-Camryn Cobb
+Camryn Cobbs
 John Garcia
 Zafar Hassan
 
 
-## License
+## License 
+MIT
 
 ### Third-Party Resources
 - This project uses the [RAWG Video Games Database API](https://rawg.io/apidocs) to provide up-to-date information on games, including release dates, platforms, genres, and publishers.
@@ -114,6 +115,3 @@ We welcome contributions to enhance *GameSeek*! Here are a few ways you can help
 
 Thank you for helping us improve *GameSeek*!
 
-## Tests (not sure how to phrase this) -john
-
-Go the extra mile and write tests for your application. Then provide examples on how to run them here.
