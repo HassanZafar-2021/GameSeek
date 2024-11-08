@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,7 +10,10 @@
     <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
-        body { font-family: 'Inter', sans-serif; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+        }
 
 
         /* Style for the sidebar */
@@ -21,127 +25,140 @@
             max-height: 400px;
             overflow-y: auto;
             padding: 1rem;
-            background-color: #f3f4f6; /* Light gray background */
-            border: 1px solid #d1d5db; /* Border color */
+            background-color: #f3f4f6;
+            /* Light gray background */
+            border: 1px solid #d1d5db;
+            /* Border color */
             border-radius: 0.5rem;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 
         }
+
         /* Dark mode styles */
         .dark-mode {
             background-color: #1a202c;
             color: #a0aec0;
         }
+
         .dark-mode .bg-white {
             background-color: #2d3748;
         }
+
         .dark-mode .text-gray-700 {
             color: #a0aec0;
         }
+
         .dark-mode .text-gray-500 {
             color: #718096;
         }
     </style>
 </head>
-<div class="bg-fixed ..." style="background-image: url(https://storage.googleapis.com/gweb-uniblog-publish-prod/images/yoodle_retrogaming_blog2x.2e16d0ba.fill-1440x810.png)">
+<div class="bg-fixed ..."
+    style="background-image: url(https://storage.googleapis.com/gweb-uniblog-publish-prod/images/yoodle_retrogaming_blog2x.2e16d0ba.fill-1440x810.png)">
 
-<body class="bg-gray-100 min-h-screen flex flex-col">
-    <!-- Header Section -->
-    <header class="bg-blue-600 text-white py-6 shadow-lg">
-        <div class="container mx-auto flex items-center justify-between">
-            <!-- Back to Home Button -->
-            <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">
-                Back to Home
-            </button>
+    <body class="bg-gray-100 min-h-screen flex flex-col">
+        <!-- Header Section -->
+        <header class="bg-blue-600 text-white py-6 shadow-lg">
+            <div class="container mx-auto flex items-center justify-between">
+                <!-- Back to Home Button -->
+                <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">
+                    Back to Home
+                </button>
 
-            <!-- Centered Title and Subtitle -->
-            <div class="text-center flex-1"> <!-- Flex-1 allows centering with space distribution -->
-                <div class="flex justify-center">
-                    <h1 class="text-4xl font-bold">
-                        <span class="text-lime-500">Ga</span><span class="text-yellow-500">me</span><span class="text-red-500">Se</span><span class="text-cyan-500">ek</span>
-                    </h1>
+                <!-- Centered Title and Subtitle -->
+                <div class="text-center flex-1"> <!-- Flex-1 allows centering with space distribution -->
+                    <div class="flex justify-center">
+                        <h1 class="text-4xl font-bold">
+                            <span class="text-lime-500">Ga</span><span class="text-yellow-500">me</span><span
+                                class="text-red-500">Se</span><span class="text-cyan-500">ek</span>
+                        </h1>
+                    </div>
+                    <p class="mt-2 text-lg font-light">Discover your favorite games</p>
                 </div>
-                <p class="mt-2 text-lg font-light">Discover your favorite games</p>
             </div>
-        </div>
-    </header>
-</body>
+        </header>
+    </body>
 
 
-      
-   
-        <!-- Main Content Section -->
+    <!-- Main Content Section -->
     <main class="flex-grow container mx-auto mt-10">
 
 
         <!-- Aside Section made by Cam -->
         <aside id="discover" class="bg-white p-2 shadow-lg rounded-lg max-w-xl mx-auto flex-col my-4">
-           
-            <div id ='genre'>
-                <h3 class ="font-semibold text-2xl ">Genre:</h3>
+
+            <div id='genre'>
+                <h3 class="font-semibold text-2xl ">Genre:</h3>
                 <ul id="genre-type" class="p-1 font-semibold md:inline-flex lg:inline-flex">
-                    <li><button class= 'pr-1' id="action">Action</button></li>
-                    <li><button class= 'pr-1' id="adventure">Adventure</button></li>
-                    <li><button class= 'pr-1'id="rpg">RPG</button></li>
-                    <li><button class= 'pr-1'id="shooter">Shooter</button></li>
-                    <li><button class= 'pr-1'id="strategy">Strategy</button></li>
-                    <li><button class= 'pr-1'id="sports">Sports</button></li>
-                    <li><button class= 'pr-1'id="puzzle">Puzzle</button></li>
+                    <li><button class='pr-1' id="action">Action</button></li>
+                    <li><button class='pr-1' id="adventure">Adventure</button></li>
+                    <li><button class='pr-1' id="rpg">RPG</button></li>
+                    <li><button class='pr-1' id="shooter">Shooter</button></li>
+                    <li><button class='pr-1' id="strategy">Strategy</button></li>
+                    <li><button class='pr-1' id="sports">Sports</button></li>
+                    <li><button class='pr-1' id="puzzle">Puzzle</button></li>
                     <li><button id="racing">Racing</button></li>
             </div>
 
             <div id="platform">
-              <h3 class ="font-semibold text-2xl  p-1">Platform:</h3>
+                <h3 class="font-semibold text-2xl  p-1">Platform:</h3>
                 <ul id="platform-type" class="p-1 font-semibold md:flex lg:flex">
-                  <li><button class= 'pr-1'id="playstation">Playstation</button></li>
-                  <li><button class= 'pr-1'id="xbox">Xbox</button></li>
-                  <li><button class= 'pr-1'id="pc">PC</button></li>
-                  <li><button class= 'pr-1'id="nintendo">Nintendo</button></li>
-                   <li><button class= 'pr-1'id="mobile">Mobile</button></li>
+                    <li><button class='pr-1' id="playstation">Playstation</button></li>
+                    <li><button class='pr-1' id="xbox">Xbox</button></li>
+                    <li><button class='pr-1' id="pc">PC</button></li>
+                    <li><button class='pr-1' id="nintendo">Nintendo</button></li>
+                    <li><button class='pr-1' id="mobile">Mobile</button></li>
                 </ul>
             </div>
 
             <div id="release">
-                <h3 class ="font-semibold text-2xl p-1">Releases:</h3>
+                <h3 class="font-semibold text-2xl p-1">Releases:</h3>
                 <ul class="font-semibold md:flex lg:flex">
-                    <li><button class= 'pr-1' id="this-year">This Year</button></li>
-                    <li><button class= 'pr-1'id="this-month">This Month</button></li>
-                    <li><button class= 'pr-1'id="this-week">This Week</button></li>
-                    <li><button class= 'pr-1'id="last-30">Last 30 Days</button></li>
-                    <li><button class= 'pr-1'id="next-30">Next 30 Days</button></li>
+                    <li><button class='pr-1' id="this-year">This Year</button></li>
+                    <li><button class='pr-1' id="this-month">This Month</button></li>
+                    <li><button class='pr-1' id="this-week">This Week</button></li>
+                    <li><button class='pr-1' id="last-30">Last 30 Days</button></li>
+                    <li><button class='pr-1' id="next-30">Next 30 Days</button></li>
                 </ul>
             </div>
 
             <div>
-                 <h3 class ="font-semibold text-2xl  p-1">Developers:</h3>
-                 <button id="developers" class="font-semibold p-1">Click Here</button>
+                <h3 class="font-semibold text-2xl  p-1">Developers:</h3>
+                <button id="developers" class="font-semibold p-1">Click Here</button>
             </div>
         </aside>
         <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
             <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Enter or speak the game title</h2>
-        
+
 
             <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
                 <div class="flex items-center w-full sm:w-auto flex-grow">
-                    <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms" 
-                           class="border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring focus:ring-blue-300" 
-                           aria-label="Search for games, genres, platforms" />
-                    
+                    <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms"
+                        class="border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring focus:ring-blue-300"
+                        aria-label="Search for games, genres, platforms" />
+
                     <!-- Mic button icon placed here -->
-                    <svg id="mic-button" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 mx-2 text-gray-600 cursor-pointer" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z"/>
+                    <svg id="mic-button" xmlns="http://www.w3.org/2000/svg"
+                        class="h-6 w-6 mx-2 text-gray-600 cursor-pointer" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z" />
                     </svg>
                 </div>
-                
-                <button type="submit" class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
-                <button type="button" id="openCompareModal" class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Compare</button>
+
+                <button type="submit"
+                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
+                <button type="button" id="openCompareModal"
+                    class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Compare</button>
             </form>
         </section>
 
         <!-- Compare Modal Structure -->
-        <div id="compareModal" class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div id="compareModal"
+            class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
             <div class="bg-white rounded-lg p-8 max-w-4xl w-full relative">
-                <button type="button" id="closeCompareModal" class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">✖</button>
+                <button type="button" id="closeCompareModal"
+                    class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">✖</button>
                 <h2 class="text-2xl font-bold mb-4 text-center">Game Comparison</h2>
                 <div class="flex gap-4">
                     <div>
@@ -151,22 +168,26 @@
 
                     <!-- Game 1 Section -->
                     <div class="flex-1">
-                        <input type="text" id="game1-input" placeholder="Enter Game 1" class="w-full p-2 mb-4 border rounded-lg">
+                        <input type="text" id="game1-input" placeholder="Enter Game 1"
+                            class="w-full p-2 mb-4 border rounded-lg">
                         <div id="game1-details" class="text-center border p-4 rounded-lg"></div>
                     </div>
-                    
+
                     <!-- Center Divider -->
                     <div class="border-r-2 h-full"></div>
-                    
+
                     <!-- Game 2 Section -->
                     <div class="flex-1">
-                        <input type="text" id="game2-input" placeholder="Enter Game 2" class="w-full p-2 mb-4 border rounded-lg">
+                        <input type="text" id="game2-input" placeholder="Enter Game 2"
+                            class="w-full p-2 mb-4 border rounded-lg">
                         <div id="game2-details" class="text-center border p-4 rounded-lg"></div>
                     </div>
                 </div>
                 <div class="mt-6 flex justify-between">
-                    <button type="button" id="compareButton" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Compare</button>
-                    <button type="button" id="clearButton" class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Clear</button>
+                    <button type="button" id="compareButton"
+                        class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Compare</button>
+                    <button type="button" id="clearButton"
+                        class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Clear</button>
                 </div>
             </div>
         </div>
@@ -181,23 +202,16 @@
             </div>
         </section>
     </main>
-    
-    
 
 
     <!-- Previously Searched Games Sidebar -->
-    <aside class="previous-searches-sidebar transition-colors duration-500 bg-white text-lg font-semibold text-gray-700 mb-2 absolute right-0 top-1/2 transform -translate-y-[65%]" id="previous-searches">
+    <aside
+        class="previous-searches-sidebar transition-colors duration-500 bg-white text-lg font-semibold text-gray-700 mb-2 absolute right-0 top-1/2 transform -translate-y-[65%]"
+        id="previous-searches">
         <h3 class="text-lg font-semibold text-gray-700 mb-2">Recently Searched Games</h3>
         <p class="text-sm text-green-500 mb-2">The last three games you searched will appear here.</p>
         <!-- JavaScript will populate this section with the last 3 searched games -->
     </aside>
-    
-    
-    
-    
-    
-    
-    
 
     <!-- Footer Section -->
 
@@ -219,10 +233,12 @@
     </div>
     <style>
         @media screen and (max-width: 768px) {
-            header.bg-blue-600 { /* Adjusted specificity */
-                background-color: rgb(7, 185, 255); /* Change header color */
+            header.bg-blue-600 {
+                /* Adjusted specificity */
+                background-color: rgb(7, 185, 255);
+                /* Change header color */
             }
-            
+
             .game-result {
                 width: 100%;
                 display: flex;
@@ -232,8 +248,6 @@
                 align-items: center;
             }
         }
-        
-        
     </style>
 
 
@@ -244,6 +258,6 @@
     <script src="js/toggle.js"></script>
     <script src="js/voice.js"></script>
     <script src="js/home.js"></script>
-</body>
+    </body>
 
 </html>
