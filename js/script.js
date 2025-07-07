@@ -1457,4 +1457,4 @@ let asideColorIndex = 0;
 setInterval(() => {
   aside.style.backgroundColor = asideColors[asideColorIndex];
   asideColorIndex = (asideColorIndex + 1) % asideColors.length;
-}, 1000); // Changes every 1 second
+}, 1000);
