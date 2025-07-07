@@ -1,4 +1,4 @@
-const API_KEY = "93fbde2a685d45cea6a36af991b6da2e"; // Your RAWG API Key
+const API_KEY = "https://api.rawg.io/api/games?key=demo"; // Your RAWG API Key
 
 // Function to fetch games from RAWG API based on search query
 async function fetchGames(query) {
