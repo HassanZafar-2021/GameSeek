@@ -1032,8 +1032,10 @@ const aside = document.getElementById("previous-searches");
 const asideColors = ["#ffffff", "#fef3c7"]; // white and light yellow (post-it note color)
 let asideColorIndex = 0;
 
-setInterval(() => {
-    aside.style.backgroundColor = asideColors[asideColorIndex];
-    asideColorIndex = (asideColorIndex + 1) % asideColors.length;
-}, 1000); // Changes every 1 second
+if (aside) {
+    setInterval(() => {
+        aside.style.backgroundColor = asideColors[asideColorIndex];
+        asideColorIndex = (asideColorIndex + 1) % asideColors.length;
+    }, 1000); // Changes every 1 second
+}
 
