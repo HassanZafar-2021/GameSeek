@@ -1,160 +1,175 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>  
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameSeek</title>
-    <!-- CSS Links in the Head -->
-    <link rel="stylesheet" href="style.css">
-    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-    <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-    <script src="https://cdn.tailwindcss.com"></script>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GameSeek</title>
+  <!-- CSS Links in the Head -->
+  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
+<!--Top page with starting info-->
+
 <body class="bg-sky-600 dark:text-red">
-    <header class="text-center p-4 dark">
-        <h1 class="text-5xl font-extrabold text-red-500">🎮<span class="underline">Welcome To GameSeek!</span>👾</h1>
-        <h3 class="text-4xl text-yellow-400 mt-2">⭐💫About Us💫⭐</h3>
-        <p class="text-green-200 mt-3 text-3xl">A cool informative website to help gamers like you look for new releases of games and metadata about them!</p>
-    </header>
-    
-    <main class="flex flex-col items-center mt-8">
-      <div class="text-center">
-        <img src="images/nobgLogo.png" alt="GameSeek Logo" class="w-2/3 mx-auto mb-4">
+  <header class="text-center p-4 dark">
+    <h1 class="text-5xl font-extrabold text-red-500">🎮<span class="underline">Welcome To GameSeek!</span>👾</h1>
+    <h3 class="text-4xl text-yellow-400 mt-2">⭐💫About Us💫⭐</h3>
+    <p class="text-green-200 mt-3 text-3xl">A cool informative website to help gamers like you look for new releases of
+      games and metadata about them!</p>
+  </header>
 
-        <p class="nes-text is-warning pb-10">Game Seeker, your destiny awaits... click the button below to launch your quest voyage on current or upcoming games!</p>
+  <!--Adding logo in center of webpage-->
+  <main class="flex flex-col items-center mt-8">
+    <div class="text-center">
+      <img src="assets/images/nobgLogo.png" alt="GameSeek Logo" class="w-2/3 mx-auto mb-4">
 
-        <div class="flex items-center justify-center space-x-4"> <!-- Added flex container -->
-          <div role="status" class="flex items-center"> <!-- Left spinner -->
-            <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-            </svg>
-            <span class="sr-only">Loading...</span>
-          </div>
-          <button type="button" 
-            class="relative text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 
+      <p class="nes-text is-warning pb-10">Game Seeker, your destiny awaits... click the button below to launch your
+        quest voyage on current or upcoming games!</p>
+
+      <div class="flex items-center justify-center space-x-4"> <!-- Added flex container -->
+        <div role="status" class="flex items-center"> <!-- Left spinner -->
+          <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor" />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill" />
+          </svg>
+          <span class="sr-only">Loading...</span>
+        </div>
+        <button type="button" class="relative text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 
             bg-red-500 hover:bg-blue-500 active:bg-green-500 focus:ring-4 focus:outline-none 
             focus:ring-blue-300 transition-colors duration-300 sparkle-effect">
-            <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M10.5 0C4.699 0 0 4.699 0 10.5S4.699 21 10.5 21c2.628 0 5.043-1.024 6.848-2.688l5.08 5.08a1.5 1.5 0 0 0 2.121-2.121l-5.08-5.08A10.483 10.483 0 0 0 21 10.5C21 4.699 16.301 0 10.5 0zM10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z"/>
-            </svg>
-            Search Games
-          </button>
-          <div role="status" class="flex items-center"> <!-- Right spinner -->
-            <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
-              <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
-            </svg>
-            <span class="sr-only">Loading...</span>
-          </div>
+          <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+            viewBox="0 0 24 24">
+            <path
+              d="M10.5 0C4.699 0 0 4.699 0 10.5S4.699 21 10.5 21c2.628 0 5.043-1.024 6.848-2.688l5.08 5.08a1.5 1.5 0 0 0 2.121-2.121l-5.08-5.08A10.483 10.483 0 0 0 21 10.5C21 4.699 16.301 0 10.5 0zM10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z" />
+          </svg>
+          Search Games
+        </button>
+        <div role="status" class="flex items-center"> <!-- Right spinner -->
+          <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+              fill="currentColor" />
+            <path
+              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+              fill="currentFill" />
+          </svg>
+          <span class="sr-only">Loading...</span>
+          <span class="sr-only">Loading...</span>
         </div>
       </div>
-    </main>
-    
-        <script>
-          document.querySelector('button').addEventListener('click', function() {
-            window.location.href = 'index.html';
-          });
-        </script>
-        
-    
-        </div>
-            <section class="icon-list">
-                <!-- controllers -->
-                <i class="nes-logo"></i>
-                <i class="nes-jp-logo"></i>
-                <i class="snes-logo"></i>
-                <i class="snes-jp-logo"></i>
-                <i class="nes-octocat animate"></i>
-                <i class="nes-smartphone"></i>
-                <i class="nes-phone"></i>
-               
-                    <i class="nes-mario"></i>
-                    <i class="nes-ash"></i>
-                    <i class="nes-pokeball"></i>
-                    <i class="nes-bulbasaur"></i>
-                    <i class="nes-charmander"></i>
-                    <i class="nes-squirtle"></i>
-                    <i class="nes-kirby"></i>
-                </section>
+    </div>
+  </main>
 
-                <!-- Balloon 'is-dark'  -->
-<section class="nes-container is-dark">
+  <script>
+    document.querySelector('button').addEventListener('click', function () {
+      window.location.href = 'index.html';
+    });
+  </script>
+
+
+  </div>
+  <section class="icon-list">
+    <!-- controllers -->
+    <i class="nes-logo"></i>
+    <i class="nes-jp-logo"></i>
+    <i class="snes-logo"></i>
+    <i class="snes-jp-logo"></i>
+    <i class="nes-octocat animate"></i>
+    <i class="nes-smartphone"></i>
+    <i class="nes-phone"></i>
+
+    <i class="nes-mario"></i>
+    <i class="nes-ash"></i>
+    <i class="nes-pokeball"></i>
+    <i class="nes-bulbasaur"></i>
+    <i class="nes-charmander"></i>
+    <i class="nes-squirtle"></i>
+    <i class="nes-kirby"></i>
+  </section>
+
+  <!-- Balloon 'is-dark'  -->
+  <section class="nes-container is-dark">
     <section class="message-list">
-        <section class="message -left">
-          <i class="nes-bcrikko"></i>
-          <!-- Balloon -->
-          <div class="nes-balloon from-left is-dark">
-            <p>Hey, what framework and libraries were used for this website?</p>
-          </div>
-        </section>
-  
-        <section class="message -right">
-          <!-- Balloon -->
-          <div class="nes-balloon from-right is-dark">
-            <p class="text-white-500 dark:text-gray-400">
-              Great question! NES framework with the Flowbite library (Tailwind CSS) were used.
-              Hover over the GitHub logo to see the project repo 
-              <a href="https://github.com/HassanZafar-2021/GameSeek" 
-                 title="GitHub Repository" 
-                 data-popover-target="popover-github"
-                 class="text-blue-600 underline dark:text-blue-500 hover:no-underline"
-                 target="_blank">
-                <i class="nes-icon github is-large" aria-hidden="true"></i>
-                <span class="sr-only">GitHub Repository</span>
-              </a>
-            </p>
-            
-            <div 
-                data-popover 
-                id="popover-github" 
-                role="tooltip" 
-                class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600"
-            >
-                <div class="grid grid-cols-5">
-                    <div class="col-span-3 p-3">
-                        <div class="space-y-2">
-                            <h3 class="font-semibold text-gray-900 dark:text-white">GitHub Repository</h3>
-                            <p>Check out our game discovery project repo on GitHub for more details!</p>
-                            <a href="https://github.com/HassanZafar-2021/GameSeek"
-                               class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline" 
-                               target="_blank">
-                              View Repo
-                              <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 6 10">
-                                  <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 9l4-4-4-4"/>
-                              </svg>
-                            </a>
-                        </div>
-                    </div>
-                    <!-- Replace the image source with your desired image -->
-                    <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" class="h-full col-span-2" alt="GitHub Logo" />
+      <section class="message -left">
+        <i class="nes-bcrikko"></i>
+        <!-- Balloon -->
+        <div class="nes-balloon from-left is-dark">
+          <p>Hey, what framework and libraries were used for this website?</p>
+        </div>
+      </section>
+
+      <section class="message -right">
+        <!-- Balloon -->
+        <div class="nes-balloon from-right is-dark">
+          <p class="text-white-500 dark:text-gray-400">
+            Great question! NES framework with the Flowbite library (Tailwind CSS) were used.
+            Hover over the GitHub logo to see the project repo
+            <a href="https://github.com/HassanZafar-2021/GameSeek" title="GitHub Repository"
+              data-popover-target="popover-github" class="text-blue-600 underline dark:text-blue-500 hover:no-underline"
+              target="_blank">
+              <i class="nes-icon github is-large" aria-hidden="true"></i>
+              <span class="sr-only">GitHub Repository</span>
+            </a>
+          </p>
+
+          <div data-popover id="popover-github" role="tooltip"
+            class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
+            <div class="grid grid-cols-5">
+              <div class="col-span-3 p-3">
+                <div class="space-y-2">
+                  <h3 class="font-semibold text-gray-900 dark:text-white">GitHub Repository</h3>
+                  <p>Check out our game discovery project repo on GitHub for more details!</p>
+                  <a href="https://github.com/HassanZafar-2021/GameSeek"
+                    class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline"
+                    target="_blank">
+                    View Repo
+                    <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
+                      viewBox="0 0 6 10">
+                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M1 9l4-4-4-4" />
+                    </svg>
+                  </a>
                 </div>
-                <div data-popper-arrow></div>
+              </div>
+              <!-- Replace the image source with your desired image -->
+              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
+                class="h-full col-span-2" alt="GitHub Logo" />
             </div>
-            
+            <div data-popper-arrow></div>
           </div>
-          <i class="nes-bcrikko"></i>
-        </section>
+
+        </div>
+        <i class="nes-bcrikko"></i>
       </section>
     </section>
   </section>
+  </section>
 
+  </main>
+  <footer class="text-center p-4 mt-8 text-gray-400">
+    <h1 class="nes-text is-error text-2xl text-red-700">
+      Crafted by your gaming squad:
+      <span class="font-bold text-red-600">Hassan</span>,
+      <span class="font-bold text-red-600">John</span>,
+      <span class="font-bold text-red-600">Anthony</span>, and
+      <span class="font-bold text-red-600">Camryn</span> — leveling up your game discovery by a simple click!
+    </h1>
+  </footer>
 
-    </main>
-    <footer class="text-center p-4 mt-8 text-gray-400">
-        <h1 class="nes-text is-error text-2xl text-red-700">
-          Crafted by your gaming squad: 
-          <span class="font-bold text-red-600">Hassan</span>, 
-          <span class="font-bold text-red-600">John</span>, 
-          <span class="font-bold text-red-600">Anthony</span>, and 
-          <span class="font-bold text-red-600">Camryn</span> — leveling up your game discovery by a simple click!
-        </h1>
-    </footer>
-    <!--:D-->
-
-    <script src="js/script.js"></script>
-    <script src="js/home.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
+  <!-- JS Links at the Bottom -->
+  <script src="js/script.js"></script>
+  <script src="js/home.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
+
 </html>
