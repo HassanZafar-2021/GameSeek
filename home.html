@@ -1,175 +1,369 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GameSeek</title>
-  <!-- CSS Links in the Head -->
-  <link rel="stylesheet" href="style.css">
-  <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.css" rel="stylesheet" />
-  <script src="https://cdn.tailwindcss.com"></script>
+  <title>GameSeek — Your Game Discovery Hub</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d14;
+      --surface: #13131f;
+      --surface2: #1a1a2e;
+      --border: rgba(124,58,237,0.2);
+      --accent: #7c3aed;
+      --accent2: #06b6d4;
+      --accent3: #f59e0b;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --glow: 0 0 40px rgba(124,58,237,0.35);
+    }
+
+    html, body { height: 100%; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background grid */
+    body::before {
+      content: '';
+      position: fixed; inset: 0; z-index: 0;
+      background-image:
+        linear-gradient(rgba(124,58,237,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(124,58,237,0.04) 1px, transparent 1px);
+      background-size: 40px 40px;
+      pointer-events: none;
+    }
+
+    /* Glow blob */
+    body::after {
+      content: '';
+      position: fixed;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+      pointer-events: none; z-index: 0;
+    }
+
+    /* ── Nav ─────────────────────────────────── */
+    nav {
+      position: relative; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.25rem 2rem;
+      border-bottom: 1px solid var(--border);
+      background: rgba(13,13,20,0.6);
+      backdrop-filter: blur(12px);
+    }
+
+    .logo {
+      font-family: 'Orbitron', monospace;
+      font-weight: 900; font-size: 1.4rem;
+      letter-spacing: 0.05em;
+    }
+    .logo span:nth-child(1) { color: var(--accent2); }
+    .logo span:nth-child(2) { color: var(--accent3); }
+    .logo span:nth-child(3) { color: var(--accent); }
+    .logo span:nth-child(4) { color: var(--text); }
+
+    .nav-links { display: flex; gap: 1.5rem; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none; font-size: 0.875rem;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text); }
+
+    /* ── Hero ────────────────────────────────── */
+    .hero {
+      position: relative; z-index: 10;
+      flex: 1;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      gap: 2rem;
+    }
+
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(124,58,237,0.15);
+      border: 1px solid rgba(124,58,237,0.3);
+      color: var(--accent);
+      font-size: 0.8rem; font-weight: 600;
+      padding: 0.35rem 1rem; border-radius: 999px;
+      letter-spacing: 0.05em;
+      animation: fadeSlideDown 0.6s ease both;
+    }
+
+    .hero-title {
+      font-family: 'Orbitron', monospace;
+      font-size: clamp(2.5rem, 8vw, 5rem);
+      font-weight: 900;
+      line-height: 1.05;
+      animation: fadeSlideDown 0.6s 0.1s ease both;
+    }
+    .hero-title .line1 { display: block; color: var(--text); }
+    .hero-title .line2 {
+      display: block;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+
+    .hero-sub {
+      max-width: 520px;
+      color: var(--muted);
+      font-size: 1.1rem; line-height: 1.7;
+      animation: fadeSlideDown 0.6s 0.2s ease both;
+    }
+
+    .hero-cta {
+      display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; justify-content: center;
+      animation: fadeSlideDown 0.6s 0.3s ease both;
+    }
+
+    .cta-primary {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 700;
+      background: var(--accent);
+      color: #fff; border: none;
+      padding: 0.875rem 2rem; border-radius: 12px;
+      cursor: pointer;
+      transition: all 0.25s;
+      position: relative; overflow: hidden;
+    }
+    .cta-primary::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.1), transparent);
+      opacity: 0; transition: opacity 0.2s;
+    }
+    .cta-primary:hover { box-shadow: var(--glow); transform: translateY(-2px); }
+    .cta-primary:hover::after { opacity: 1; }
+
+    .cta-secondary {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem; font-weight: 500;
+      background: transparent;
+      color: var(--muted); border: 1px solid var(--border);
+      padding: 0.875rem 1.5rem; border-radius: 12px;
+      cursor: pointer; transition: all 0.2s;
+    }
+    .cta-secondary:hover { border-color: var(--accent2); color: var(--accent2); }
+
+    /* ── Stats Strip ─────────────────────────── */
+    .stats-strip {
+      position: relative; z-index: 10;
+      display: flex; justify-content: center; gap: 0; flex-wrap: wrap;
+      border-top: 1px solid var(--border);
+      background: rgba(13,13,20,0.5);
+      backdrop-filter: blur(8px);
+    }
+
+    .stat-item {
+      padding: 1.5rem 3rem;
+      text-align: center;
+      border-right: 1px solid var(--border);
+      animation: fadeSlideDown 0.6s 0.4s ease both;
+    }
+    .stat-item:last-child { border-right: none; }
+
+    .stat-num {
+      font-family: 'Orbitron', monospace;
+      font-size: 1.75rem; font-weight: 900;
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent2) 100%);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    }
+    .stat-label { color: var(--muted); font-size: 0.8rem; margin-top: 0.25rem; }
+
+    /* ── Features ────────────────────────────── */
+    .features {
+      position: relative; z-index: 10;
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.25rem;
+      padding: 3rem 2rem;
+      max-width: 1000px; margin: 0 auto; width: 100%;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px; padding: 1.5rem;
+      transition: all 0.2s;
+    }
+    .feature-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 8px 32px rgba(124,58,237,0.15);
+      transform: translateY(-3px);
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+    .feature-title { font-weight: 700; margin-bottom: 0.5rem; }
+    .feature-desc { font-size: 0.875rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── Chat Bubble section ─────────────────── */
+    .chat-section {
+      position: relative; z-index: 10;
+      max-width: 700px; margin: 0 auto 3rem;
+      padding: 0 2rem;
+    }
+
+    .chat-bubble-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 20px; padding: 1.5rem;
+    }
+
+    .chat-msg {
+      display: flex; gap: 0.75rem; margin-bottom: 1rem; align-items: flex-start;
+    }
+    .chat-msg:last-child { margin-bottom: 0; }
+    .chat-avatar {
+      width: 36px; height: 36px; border-radius: 50%;
+      background: var(--surface2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem; flex-shrink: 0;
+    }
+    .chat-bubble {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 12px; padding: 0.75rem 1rem;
+      font-size: 0.875rem; line-height: 1.6;
+      max-width: 500px;
+    }
+    .chat-bubble.right { background: rgba(124,58,237,0.12); border-color: rgba(124,58,237,0.25); }
+    .chat-msg.right { flex-direction: row-reverse; }
+    .chat-bubble a { color: var(--accent2); text-decoration: none; }
+    .chat-bubble a:hover { text-decoration: underline; }
+
+    /* ── Footer ──────────────────────────────── */
+    footer {
+      position: relative; z-index: 10;
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      padding: 1.25rem;
+      color: var(--muted); font-size: 0.8rem;
+    }
+    footer strong { color: var(--accent); }
+
+    /* ── Animations ──────────────────────────── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 600px) {
+      .stats-strip { flex-direction: column; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      nav { padding: 1rem; }
+      .nav-links { display: none; }
+    }
+  </style>
 </head>
+<body>
 
-<!--Top page with starting info-->
+  <nav>
+    <div class="logo"><span>Ga</span><span>me</span><span>Se</span><span>ek</span></div>
+    <div class="nav-links">
+      <a href="index.html">Search</a>
+      <a href="https://github.com/HassanZafar-2021/GameSeek" target="_blank">GitHub</a>
+    </div>
+  </nav>
 
-<body class="bg-sky-600 dark:text-red">
-  <header class="text-center p-4 dark">
-    <h1 class="text-5xl font-extrabold text-red-500">🎮<span class="underline">Welcome To GameSeek!</span>👾</h1>
-    <h3 class="text-4xl text-yellow-400 mt-2">⭐💫About Us💫⭐</h3>
-    <p class="text-green-200 mt-3 text-3xl">A cool informative website to help gamers like you look for new releases of
-      games and metadata about them!</p>
-  </header>
+  <section class="hero">
+    <div class="hero-badge">🎮 Powered by RAWG · 500,000+ Games</div>
 
-  <!--Adding logo in center of webpage-->
-  <main class="flex flex-col items-center mt-8">
-    <div class="text-center">
-      <img src="assets/images/nobgLogo.png" alt="GameSeek Logo" class="w-2/3 mx-auto mb-4">
+    <h1 class="hero-title">
+      <span class="line1">Discover Your</span>
+      <span class="line2">Next Game</span>
+    </h1>
 
-      <p class="nes-text is-warning pb-10">Game Seeker, your destiny awaits... click the button below to launch your
-        quest voyage on current or upcoming games!</p>
+    <p class="hero-sub">
+      Search, filter, and compare across hundreds of thousands of games. 
+      Real-time data, smart filtering, and voice search — all in one place.
+    </p>
 
-      <div class="flex items-center justify-center space-x-4"> <!-- Added flex container -->
-        <div role="status" class="flex items-center"> <!-- Left spinner -->
-          <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor" />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill" />
-          </svg>
-          <span class="sr-only">Loading...</span>
+    <div class="hero-cta">
+      <button class="cta-primary" id="enterBtn">🚀 Start Exploring</button>
+      <button class="cta-secondary" onclick="window.open('https://github.com/HassanZafar-2021/GameSeek','_blank')">⭐ View on GitHub</button>
+    </div>
+  </section>
+
+  <div class="stats-strip">
+    <div class="stat-item">
+      <div class="stat-num">500K+</div>
+      <div class="stat-label">Games in Database</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">50+</div>
+      <div class="stat-label">Platforms Covered</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Live</div>
+      <div class="stat-label">Data Updated Daily</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">Free</div>
+      <div class="stat-label">Always & Forever</div>
+    </div>
+  </div>
+
+  <div class="features">
+    <div class="feature-card">
+      <div class="feature-icon">🔍</div>
+      <div class="feature-title">Smart Search</div>
+      <div class="feature-desc">Exact-match search with fuzzy fallback. Find exactly what you're looking for, even with typos.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🎤</div>
+      <div class="feature-title">Voice Search</div>
+      <div class="feature-desc">Just speak the game name. Web Speech API powers hands-free discovery.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">⚖️</div>
+      <div class="feature-title">Game Compare</div>
+      <div class="feature-desc">Side-by-side comparison of any two games — ratings, platforms, genres, and more.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📅</div>
+      <div class="feature-title">Live Releases</div>
+      <div class="feature-desc">This week, this month, next 30 days — release filters always reflect today's real date.</div>
+    </div>
+  </div>
+
+  <div class="chat-section">
+    <div class="chat-bubble-wrap">
+      <div class="chat-msg">
+        <div class="chat-avatar">🐛</div>
+        <div class="chat-bubble">Hey, what stack is GameSeek built on?</div>
+      </div>
+      <div class="chat-msg right">
+        <div class="chat-bubble right">
+          Vanilla JS + RAWG API for data, with Tailwind (via CDN) for utility classes. 
+          Check the full project on <a href="https://github.com/HassanZafar-2021/GameSeek" target="_blank">GitHub ↗</a>
         </div>
-        <button type="button" class="relative text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center me-2 
-            bg-red-500 hover:bg-blue-500 active:bg-green-500 focus:ring-4 focus:outline-none 
-            focus:ring-blue-300 transition-colors duration-300 sparkle-effect">
-          <svg class="w-3.5 h-3.5 me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
-            viewBox="0 0 24 24">
-            <path
-              d="M10.5 0C4.699 0 0 4.699 0 10.5S4.699 21 10.5 21c2.628 0 5.043-1.024 6.848-2.688l5.08 5.08a1.5 1.5 0 0 0 2.121-2.121l-5.08-5.08A10.483 10.483 0 0 0 21 10.5C21 4.699 16.301 0 10.5 0zM10.5 17a6.5 6.5 0 1 1 0-13 6.5 6.5 0 0 1 0 13z" />
-          </svg>
-          Search Games
-        </button>
-        <div role="status" class="flex items-center"> <!-- Right spinner -->
-          <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
-            viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
-              fill="currentColor" />
-            <path
-              d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
-              fill="currentFill" />
-          </svg>
-          <span class="sr-only">Loading...</span>
-          <span class="sr-only">Loading...</span>
-        </div>
+        <div class="chat-avatar">🎮</div>
       </div>
     </div>
-  </main>
-
-  <script>
-    document.querySelector('button').addEventListener('click', function () {
-      window.location.href = 'index.html';
-    });
-  </script>
-
-
   </div>
-  <section class="icon-list">
-    <!-- controllers -->
-    <i class="nes-logo"></i>
-    <i class="nes-jp-logo"></i>
-    <i class="snes-logo"></i>
-    <i class="snes-jp-logo"></i>
-    <i class="nes-octocat animate"></i>
-    <i class="nes-smartphone"></i>
-    <i class="nes-phone"></i>
 
-    <i class="nes-mario"></i>
-    <i class="nes-ash"></i>
-    <i class="nes-pokeball"></i>
-    <i class="nes-bulbasaur"></i>
-    <i class="nes-charmander"></i>
-    <i class="nes-squirtle"></i>
-    <i class="nes-kirby"></i>
-  </section>
-
-  <!-- Balloon 'is-dark'  -->
-  <section class="nes-container is-dark">
-    <section class="message-list">
-      <section class="message -left">
-        <i class="nes-bcrikko"></i>
-        <!-- Balloon -->
-        <div class="nes-balloon from-left is-dark">
-          <p>Hey, what framework and libraries were used for this website?</p>
-        </div>
-      </section>
-
-      <section class="message -right">
-        <!-- Balloon -->
-        <div class="nes-balloon from-right is-dark">
-          <p class="text-white-500 dark:text-gray-400">
-            Great question! NES framework with the Flowbite library (Tailwind CSS) were used.
-            Hover over the GitHub logo to see the project repo
-            <a href="https://github.com/HassanZafar-2021/GameSeek" title="GitHub Repository"
-              data-popover-target="popover-github" class="text-blue-600 underline dark:text-blue-500 hover:no-underline"
-              target="_blank">
-              <i class="nes-icon github is-large" aria-hidden="true"></i>
-              <span class="sr-only">GitHub Repository</span>
-            </a>
-          </p>
-
-          <div data-popover id="popover-github" role="tooltip"
-            class="absolute z-10 invisible inline-block text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm opacity-0 w-96 dark:text-gray-400 dark:bg-gray-800 dark:border-gray-600">
-            <div class="grid grid-cols-5">
-              <div class="col-span-3 p-3">
-                <div class="space-y-2">
-                  <h3 class="font-semibold text-gray-900 dark:text-white">GitHub Repository</h3>
-                  <p>Check out our game discovery project repo on GitHub for more details!</p>
-                  <a href="https://github.com/HassanZafar-2021/GameSeek"
-                    class="flex items-center font-medium text-blue-600 dark:text-blue-500 dark:hover:text-blue-600 hover:text-blue-700 hover:underline"
-                    target="_blank">
-                    View Repo
-                    <svg class="w-2 h-2 ml-1" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none"
-                      viewBox="0 0 6 10">
-                      <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                        d="M1 9l4-4-4-4" />
-                    </svg>
-                  </a>
-                </div>
-              </div>
-              <!-- Replace the image source with your desired image -->
-              <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png"
-                class="h-full col-span-2" alt="GitHub Logo" />
-            </div>
-            <div data-popper-arrow></div>
-          </div>
-
-        </div>
-        <i class="nes-bcrikko"></i>
-      </section>
-    </section>
-  </section>
-  </section>
-
-  </main>
-  <footer class="text-center p-4 mt-8 text-gray-400">
-    <h1 class="nes-text is-error text-2xl text-red-700">
-      Crafted by your gaming squad:
-      <span class="font-bold text-red-600">Hassan</span>,
-      <span class="font-bold text-red-600">John</span>,
-      <span class="font-bold text-red-600">Anthony</span>, and
-      <span class="font-bold text-red-600">Camryn</span> — leveling up your game discovery by a simple click!
-    </h1>
+  <footer>
+    <p>Crafted by <strong>Hassan</strong>, <strong>John</strong>, <strong>Anthony</strong>, and <strong>Camryn</strong> — leveling up your game discovery 🎮</p>
+    <p style="margin-top:0.4rem">© 2026 GameSeek · Powered by RAWG · <a href="https://github.com/HassanZafar-2021/GameSeek" target="_blank" style="color:var(--accent2);text-decoration:none">GitHub</a></p>
   </footer>
 
-  <!-- JS Links at the Bottom -->
-  <script src="js/script.js"></script>
+  <script>
+    document.getElementById("enterBtn").addEventListener("click", () => {
+      window.location.href = "index.html";
+    });
+  </script>
   <script src="js/home.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/flowbite@2.5.2/dist/flowbite.min.js"></script>
 </body>
-
 </html>

@@ -1,263 +1,1015 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GameSeek - Search</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://unpkg.com/nes.css@latest/css/nes.min.css" rel="stylesheet" />
-    <link href="https://unpkg.com/flowbite@1.4.7/dist/flowbite.min.css" rel="stylesheet" />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>GameSeek — Discover Your Next Game</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Inter:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Graphik:wght@400;700&family=Merriweather:wght@400;700&display=swap');
+      /* ── Reset & Variables ─────────────────────────────── */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-        body {
-            font-family: 'Inter', sans-serif;
+      :root {
+        --bg: #0d0d14;
+        --surface: #13131f;
+        --surface2: #1a1a2e;
+        --border: rgba(124, 58, 237, 0.2);
+        --accent: #7c3aed;
+        --accent2: #06b6d4;
+        --accent3: #f59e0b;
+        --text: #e2e8f0;
+        --muted: #64748b;
+        --danger: #ef4444;
+        --success: #10b981;
+        --glow: 0 0 20px rgba(124, 58, 237, 0.4);
+        --card-r: 12px;
+      }
+
+      .dark-mode {
+        --bg: #f8fafc;
+        --surface: #ffffff;
+        --surface2: #f1f5f9;
+        --border: rgba(99, 102, 241, 0.2);
+        --text: #0f172a;
+        --muted: #64748b;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
+      body {
+        font-family: "Inter", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        transition:
+          background 0.4s,
+          color 0.4s;
+      }
+
+      /* ── Scrollbar ──────────────────────────────────────── */
+      ::-webkit-scrollbar {
+        width: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: var(--surface);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: var(--accent);
+        border-radius: 3px;
+      }
+
+      /* ── Header ─────────────────────────────────────────── */
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(13, 13, 20, 0.85);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--border);
+        padding: 0.875rem 1.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .header-left {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .back-btn {
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text);
+        padding: 0.5rem 1rem;
+        border-radius: 8px;
+        font-size: 0.85rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        font-family: inherit;
+        white-space: nowrap;
+      }
+      .back-btn:hover {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
+
+      .logo {
+        font-family: "Orbitron", monospace;
+        font-weight: 900;
+        font-size: 1.5rem;
+        letter-spacing: 0.05em;
+      }
+      .logo span:nth-child(1) {
+        color: var(--accent2);
+      }
+      .logo span:nth-child(2) {
+        color: var(--accent3);
+      }
+      .logo span:nth-child(3) {
+        color: var(--accent);
+      }
+      .logo span:nth-child(4) {
+        color: var(--text);
+      }
+
+      .header-right {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+      }
+
+      /* ── Dark Mode Toggle ────────────────────────────────── */
+      .theme-toggle {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 1rem;
+      }
+      .toggle-track {
+        width: 44px;
+        height: 24px;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        position: relative;
+        cursor: pointer;
+        transition: background 0.3s;
+      }
+      #themeToggle {
+        display: none;
+      }
+      #themeToggle:checked + .toggle-track {
+        background: var(--accent);
+      }
+      .toggle-dot {
+        position: absolute;
+        top: 3px;
+        left: 3px;
+        width: 16px;
+        height: 16px;
+        background: #fff;
+        border-radius: 50%;
+        transition: transform 0.3s;
+      }
+      #themeToggle:checked ~ .toggle-dot {
+        transform: translateX(20px);
+      }
+
+      /* ── Layout ─────────────────────────────────────────── */
+      .page-wrap {
+        display: flex;
+        flex: 1;
+        max-width: 1400px;
+        margin: 0 auto;
+        width: 100%;
+        padding: 1.5rem;
+        gap: 1.5rem;
+      }
+
+      /* ── Sidebar ─────────────────────────────────────────── */
+      aside.filter-sidebar {
+        width: 220px;
+        flex-shrink: 0;
+      }
+
+      .filter-group {
+        margin-bottom: 1.5rem;
+      }
+
+      .filter-group-title {
+        font-family: "Orbitron", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 0.5rem;
+        padding-left: 0.25rem;
+      }
+
+      .filter-btn {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: transparent;
+        border: none;
+        color: var(--muted);
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        padding: 0.5rem 0.75rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.15s;
+        margin-bottom: 2px;
+      }
+      .filter-btn:hover {
+        background: var(--surface2);
+        color: var(--text);
+      }
+      .filter-btn.active {
+        background: rgba(124, 58, 237, 0.15);
+        color: var(--accent);
+        font-weight: 600;
+      }
+
+      /* ── Main Content ────────────────────────────────────── */
+      main {
+        flex: 1;
+        min-width: 0;
+      }
+
+      /* ── Search Bar ──────────────────────────────────────── */
+      .search-wrap {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1.25rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .search-title {
+        font-family: "Orbitron", monospace;
+        font-size: 0.75rem;
+        letter-spacing: 0.1em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+
+      .search-row {
+        display: flex;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      .search-input-wrap {
+        flex: 1;
+        position: relative;
+      }
+
+      #search-input {
+        width: 100%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-family: "Inter", sans-serif;
+        font-size: 0.95rem;
+        padding: 0.75rem 3rem 0.75rem 1rem;
+        border-radius: 10px;
+        outline: none;
+        transition:
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      #search-input::placeholder {
+        color: var(--muted);
+      }
+      #search-input:focus {
+        border-color: var(--accent);
+        box-shadow: var(--glow);
+      }
+
+      #mic-button {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--muted);
+        cursor: pointer;
+        transition: color 0.2s;
+      }
+      #mic-button:hover {
+        color: var(--accent2);
+      }
+      #mic-button.listening {
+        color: var(--danger);
+        animation: pulse 1s infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
         }
-
-
-        /* Style for the sidebar */
-        .previous-searches-sidebar {
-            position: fixed;
-            top: 100px;
-            right: 20px;
-            width: 250px;
-            max-height: 400px;
-            overflow-y: auto;
-            padding: 1rem;
-            background-color: #f3f4f6;
-            /* Light gray background */
-            border: 1px solid #d1d5db;
-            /* Border color */
-            border-radius: 0.5rem;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-
+        50% {
+          opacity: 0.5;
         }
+      }
 
-        /* Dark mode styles */
-        .dark-mode {
-            background-color: #1a202c;
-            color: #a0aec0;
-        }
+      .btn {
+        font-family: "Inter", sans-serif;
+        font-size: 0.875rem;
+        font-weight: 600;
+        padding: 0.75rem 1.25rem;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: all 0.2s;
+        white-space: nowrap;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: #6d28d9;
+        box-shadow: var(--glow);
+      }
+      .btn-secondary {
+        background: var(--surface2);
+        color: var(--text);
+        border: 1px solid var(--border);
+      }
+      .btn-secondary:hover {
+        border-color: var(--accent2);
+        color: var(--accent2);
+      }
 
-        .dark-mode .bg-white {
-            background-color: #2d3748;
-        }
+      /* ── Game Grid ───────────────────────────────────────── */
+      .game-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 1.25rem;
+      }
 
-        .dark-mode .text-gray-700 {
-            color: #a0aec0;
-        }
+      .game-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--card-r);
+        overflow: hidden;
+        cursor: pointer;
+        transition:
+          transform 0.2s,
+          border-color 0.2s,
+          box-shadow 0.2s;
+      }
+      .game-card:hover {
+        transform: translateY(-4px);
+        border-color: var(--accent);
+        box-shadow: 0 8px 32px rgba(124, 58, 237, 0.2);
+      }
 
-        .dark-mode .text-gray-500 {
-            color: #718096;
+      .card-img-wrap {
+        position: relative;
+        overflow: hidden;
+      }
+      .card-img-wrap img {
+        width: 100%;
+        height: 160px;
+        object-fit: cover;
+        display: block;
+        transition: transform 0.3s;
+      }
+      .game-card:hover .card-img-wrap img {
+        transform: scale(1.05);
+      }
+
+      .card-rating {
+        position: absolute;
+        top: 0.5rem;
+        right: 0.5rem;
+        background: rgba(0, 0, 0, 0.75);
+        backdrop-filter: blur(4px);
+        color: #fff;
+        font-size: 0.75rem;
+        font-weight: 600;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+      }
+
+      .card-body {
+        padding: 1rem;
+      }
+      .card-title {
+        font-size: 0.95rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+        line-height: 1.3;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .card-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+      }
+      .card-meta span {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      /* ── Game Detail Modal ───────────────────────────────── */
+      .modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 200;
+        background: rgba(0, 0, 0, 0.8);
+        backdrop-filter: blur(8px);
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+      .modal-overlay.open {
+        display: flex;
+      }
+
+      .modal-box {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        width: 100%;
+        max-width: 700px;
+        max-height: 90vh;
+        overflow-y: auto;
+        position: relative;
+      }
+
+      .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        background: rgba(0, 0, 0, 0.5);
+        border: none;
+        color: #fff;
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        font-size: 1rem;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background 0.2s;
+      }
+      .modal-close:hover {
+        background: var(--danger);
+      }
+
+      .detail-hero {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        border-radius: 20px 20px 0 0;
+      }
+
+      .detail-content {
+        padding: 1.5rem;
+      }
+      .detail-content h2 {
+        font-size: 1.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+      }
+
+      .detail-stats {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.75rem;
+        margin-bottom: 1rem;
+      }
+      .stat {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 0.75rem;
+      }
+      .stat-label {
+        display: block;
+        font-size: 0.7rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        margin-bottom: 0.25rem;
+      }
+      .stat-value {
+        font-weight: 700;
+        font-size: 1rem;
+      }
+
+      .detail-content p {
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+        color: var(--muted);
+      }
+      .detail-content p strong {
+        color: var(--text);
+      }
+
+      .tag {
+        display: inline-block;
+        background: rgba(124, 58, 237, 0.15);
+        color: var(--accent);
+        font-size: 0.75rem;
+        padding: 0.2rem 0.5rem;
+        border-radius: 6px;
+        margin: 0.15rem;
+      }
+
+      .visit-btn {
+        display: inline-block;
+        margin-top: 1rem;
+        background: var(--accent);
+        color: #fff;
+        text-decoration: none;
+        padding: 0.6rem 1.25rem;
+        border-radius: 8px;
+        font-size: 0.875rem;
+        font-weight: 600;
+        transition: background 0.2s;
+      }
+      .visit-btn:hover {
+        background: #6d28d9;
+      }
+
+      /* ── Compare Modal ───────────────────────────────────── */
+      #compareModal .modal-box {
+        max-width: 900px;
+      }
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr auto 1fr;
+        gap: 1rem;
+        align-items: start;
+        margin: 1.25rem 0;
+      }
+      .compare-divider {
+        width: 1px;
+        background: var(--border);
+        align-self: stretch;
+        margin-top: 2.5rem;
+      }
+      .compare-input {
+        width: 100%;
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-family: inherit;
+        padding: 0.65rem 1rem;
+        border-radius: 10px;
+        outline: none;
+        margin-bottom: 0.75rem;
+        font-size: 0.9rem;
+      }
+      .compare-input:focus {
+        border-color: var(--accent);
+      }
+      .compare-result-box {
+        background: var(--surface2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        padding: 1rem;
+        min-height: 120px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .compare-result-box img {
+        width: 100%;
+        border-radius: 8px;
+        height: 140px;
+        object-fit: cover;
+        margin-bottom: 0.75rem;
+      }
+      .compare-result-box h3 {
+        font-size: 1rem;
+        font-weight: 700;
+        color: var(--text);
+        margin-bottom: 0.4rem;
+      }
+      .modal-footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 0.75rem;
+        margin-top: 1rem;
+      }
+      .color-row {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      #colorPicker {
+        width: 32px;
+        height: 32px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        padding: 0;
+      }
+      .modal-header {
+        padding: 1.5rem 1.5rem 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .modal-header h2 {
+        font-family: "Orbitron", monospace;
+        font-size: 1rem;
+        letter-spacing: 0.05em;
+      }
+
+      /* ── Dev Grid ────────────────────────────────────────── */
+      .dev-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 1rem;
+      }
+      .dev-card {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: var(--card-r);
+        overflow: hidden;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .dev-card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent2);
+      }
+      .dev-card img {
+        width: 100%;
+        height: 120px;
+        object-fit: cover;
+      }
+      .dev-info {
+        padding: 0.75rem;
+      }
+      .dev-info h4 {
+        font-size: 0.9rem;
+        font-weight: 700;
+        margin-bottom: 0.2rem;
+      }
+      .dev-info p {
+        font-size: 0.75rem;
+        color: var(--muted);
+      }
+
+      /* ── Recent Searches Sidebar (right) ─────────────────── */
+      .right-sidebar {
+        width: 220px;
+        flex-shrink: 0;
+      }
+
+      .sidebar-panel {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 1rem;
+        position: sticky;
+        top: 80px;
+      }
+
+      .sidebar-title {
+        font-family: "Orbitron", monospace;
+        font-size: 0.65rem;
+        letter-spacing: 0.15em;
+        color: var(--muted);
+        text-transform: uppercase;
+        margin-bottom: 0.75rem;
+      }
+      .sidebar-empty {
+        font-size: 0.8rem;
+        color: var(--muted);
+      }
+
+      .sidebar-item {
+        display: flex;
+        gap: 0.6rem;
+        align-items: center;
+        padding: 0.5rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: background 0.15s;
+        margin-bottom: 0.4rem;
+      }
+      .sidebar-item:hover {
+        background: var(--surface2);
+      }
+      .sidebar-item img {
+        width: 40px;
+        height: 32px;
+        object-fit: cover;
+        border-radius: 6px;
+        flex-shrink: 0;
+      }
+      .sidebar-item div {
+        min-width: 0;
+      }
+      .sidebar-item strong {
+        font-size: 0.8rem;
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .sidebar-item span {
+        font-size: 0.7rem;
+        color: var(--muted);
+      }
+
+      .sidebar-clear {
+        width: 100%;
+        margin-top: 0.75rem;
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--muted);
+        font-family: inherit;
+        font-size: 0.75rem;
+        padding: 0.4rem;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.2s;
+      }
+      .sidebar-clear:hover {
+        border-color: var(--danger);
+        color: var(--danger);
+      }
+
+      /* ── States ──────────────────────────────────────────── */
+      .loading-state {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1rem;
+        padding: 4rem;
+        color: var(--muted);
+      }
+      .spinner {
+        width: 40px;
+        height: 40px;
+        border: 3px solid var(--border);
+        border-top-color: var(--accent);
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
         }
+      }
+
+      .empty-msg,
+      .error-msg {
+        text-align: center;
+        color: var(--muted);
+        padding: 3rem;
+        font-size: 0.95rem;
+      }
+
+      #game-results {
+        min-height: 200px;
+      }
+
+      /* ── Footer ──────────────────────────────────────────── */
+      footer {
+        background: var(--surface);
+        border-top: 1px solid var(--border);
+        text-align: center;
+        padding: 1.25rem;
+        color: var(--muted);
+        font-size: 0.8rem;
+      }
+      footer strong {
+        color: var(--accent);
+      }
+
+      /* ── Responsive ──────────────────────────────────────── */
+      @media (max-width: 1024px) {
+        .right-sidebar {
+          display: none;
+        }
+      }
+      @media (max-width: 768px) {
+        .filter-sidebar {
+          display: none;
+        }
+        .page-wrap {
+          padding: 1rem;
+        }
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+        .compare-divider {
+          display: none;
+        }
+      }
     </style>
-</head>
-<div class="bg-fixed ..."
-    style="background-image: url(https://storage.googleapis.com/gweb-uniblog-publish-prod/images/yoodle_retrogaming_blog2x.2e16d0ba.fill-1440x810.png)">
+  </head>
+  <body>
+    <!-- ── Header ─────────────────────────────────────────── -->
+    <header>
+      <div class="header-left">
+        <button class="back-btn" id="backToHome">← Home</button>
+        <div class="logo">
+          <span>Ga</span><span>me</span><span>Se</span><span>ek</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <div class="theme-toggle">
+          <span>☀️</span>
+          <input type="checkbox" id="themeToggle" />
+          <label class="toggle-track" for="themeToggle">
+            <div class="toggle-dot"></div>
+          </label>
+          <span>🌙</span>
+        </div>
+      </div>
+    </header>
 
-    <body class="bg-gray-100 min-h-screen flex flex-col">
-        <!-- Header Section -->
-        <header class="bg-blue-600 text-white py-6 shadow-lg">
-            <div class="container mx-auto flex items-center justify-between">
-                <!-- Back to Home Button -->
-                <button id="backToHome" class="bg-red-600 text-white py-2 px-4 rounded hover:bg-blue-500">
-                    Back to Home
-                </button>
-
-                <!-- Centered Title and Subtitle -->
-                <div class="text-center flex-1"> <!-- Flex-1 allows centering with space distribution -->
-                    <div class="flex justify-center">
-                        <h1 class="text-4xl font-bold">
-                            <span class="text-lime-500">Ga</span><span class="text-yellow-500">me</span><span
-                                class="text-red-500">Se</span><span class="text-cyan-500">ek</span>
-                        </h1>
-                    </div>
-                    <p class="mt-2 text-lg font-light">Discover your favorite games</p>
-                </div>
-            </div>
-        </header>
-    </body>
-
-
-    <!-- Main Content Section -->
-    <main class="flex-grow container mx-auto mt-10">
-
-
-        <!-- Aside Section made by Cam -->
-        <aside id="discover" class="bg-white p-2 shadow-lg rounded-lg max-w-xl mx-auto flex-col my-4">
-
-            <div id='genre'>
-                <h3 class="font-semibold text-2xl ">Genre:</h3>
-                <ul id="genre-type" class="p-1 font-semibold md:inline-flex lg:inline-flex">
-                    <li><button class='pr-1' id="action">Action</button></li>
-                    <li><button class='pr-1' id="adventure">Adventure</button></li>
-                    <li><button class='pr-1' id="rpg">RPG</button></li>
-                    <li><button class='pr-1' id="shooter">Shooter</button></li>
-                    <li><button class='pr-1' id="strategy">Strategy</button></li>
-                    <li><button class='pr-1' id="sports">Sports</button></li>
-                    <li><button class='pr-1' id="puzzle">Puzzle</button></li>
-                    <li><button id="racing">Racing</button></li>
-            </div>
-
-            <div id="platform">
-                <h3 class="font-semibold text-2xl  p-1">Platform:</h3>
-                <ul id="platform-type" class="p-1 font-semibold md:flex lg:flex">
-                    <li><button class='pr-1' id="playstation">Playstation</button></li>
-                    <li><button class='pr-1' id="xbox">Xbox</button></li>
-                    <li><button class='pr-1' id="pc">PC</button></li>
-                    <li><button class='pr-1' id="nintendo">Nintendo</button></li>
-                    <li><button class='pr-1' id="mobile">Mobile</button></li>
-                </ul>
-            </div>
-
-            <div id="release">
-                <h3 class="font-semibold text-2xl p-1">Releases:</h3>
-                <ul class="font-semibold md:flex lg:flex">
-                    <li><button class='pr-1' id="this-year">This Year</button></li>
-                    <li><button class='pr-1' id="this-month">This Month</button></li>
-                    <li><button class='pr-1' id="this-week">This Week</button></li>
-                    <li><button class='pr-1' id="last-30">Last 30 Days</button></li>
-                    <li><button class='pr-1' id="next-30">Next 30 Days</button></li>
-                </ul>
-            </div>
-
-            <div>
-                <h3 class="font-semibold text-2xl  p-1">Developers:</h3>
-                <button id="developers" class="font-semibold p-1">Click Here</button>
-            </div>
-        </aside>
-        <section class="search-bar bg-white p-8 shadow-lg rounded-lg max-w-xl mx-auto">
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4 text-center">Enter or speak the game title</h2>
-
-
-            <form id="game-search-form" class="flex flex-col sm:flex-row items-center gap-4">
-                <div class="flex items-center w-full sm:w-auto flex-grow">
-                    <input type="text" id="search-input" name="search" placeholder="Search games, genres, platforms"
-                        class="border border-gray-300 p-3 rounded-lg w-full focus:outline-none focus:ring focus:ring-blue-300"
-                        aria-label="Search for games, genres, platforms" />
-
-                    <!-- Mic button icon placed here -->
-                    <svg id="mic-button" xmlns="http://www.w3.org/2000/svg"
-                        class="h-6 w-6 mx-2 text-gray-600 cursor-pointer" fill="none" viewBox="0 0 24 24"
-                        stroke="currentColor">
-                        <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M15 7v3a5.006 5.006 0 0 1-5 5H6a5.006 5.006 0 0 1-5-5V7m7 9v3m-3 0h6M7 1h2a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H7a3 3 0 0 1-3-3V4a3 3 0 0 1 3-3Z" />
-                    </svg>
-                </div>
-
-                <button type="submit"
-                    class="bg-blue-600 text-white py-3 px-6 rounded-lg hover:bg-blue-700 transition duration-300">Search</button>
-                <button type="button" id="openCompareModal"
-                    class="bg-green-600 text-white py-3 px-6 rounded-lg hover:bg-green-700 transition duration-300">Compare</button>
-            </form>
-        </section>
-
-        <!-- Compare Modal Structure -->
-        <div id="compareModal"
-            class="hidden fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-            <div class="bg-white rounded-lg p-8 max-w-4xl w-full relative">
-                <button type="button" id="closeCompareModal"
-                    class="absolute top-4 right-4 text-gray-600 hover:text-gray-900">✖</button>
-                <h2 class="text-2xl font-bold mb-4 text-center">Game Comparison</h2>
-                <div class="flex gap-4">
-                    <div>
-                        <label for="colorPicker">Select Color:</label>
-                        <input type="color" id="colorPicker" value="#ff0000">
-                    </div>
-
-                    <!-- Game 1 Section -->
-                    <div class="flex-1">
-                        <input type="text" id="game1-input" placeholder="Enter Game 1"
-                            class="w-full p-2 mb-4 border rounded-lg">
-                        <div id="game1-details" class="text-center border p-4 rounded-lg"></div>
-                    </div>
-
-                    <!-- Center Divider -->
-                    <div class="border-r-2 h-full"></div>
-
-                    <!-- Game 2 Section -->
-                    <div class="flex-1">
-                        <input type="text" id="game2-input" placeholder="Enter Game 2"
-                            class="w-full p-2 mb-4 border rounded-lg">
-                        <div id="game2-details" class="text-center border p-4 rounded-lg"></div>
-                    </div>
-                </div>
-                <div class="mt-6 flex justify-between">
-                    <button type="button" id="compareButton"
-                        class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700">Compare</button>
-                    <button type="button" id="clearButton"
-                        class="bg-gray-500 text-white py-2 px-4 rounded-lg hover:bg-gray-700">Clear</button>
-                </div>
-            </div>
+    <!-- ── Page Wrap ──────────────────────────────────────── -->
+    <div class="page-wrap">
+      <!-- ── Filter Sidebar ─────────────────────────────── -->
+      <aside class="filter-sidebar">
+        <div class="filter-group">
+          <div class="filter-group-title">Genre</div>
+          <button class="filter-btn" id="action">🎯 Action</button>
+          <button class="filter-btn" id="adventure">🗺️ Adventure</button>
+          <button class="filter-btn" id="rpg">⚔️ RPG</button>
+          <button class="filter-btn" id="shooter">🔫 Shooter</button>
+          <button class="filter-btn" id="strategy">♟️ Strategy</button>
+          <button class="filter-btn" id="sports">🏆 Sports</button>
+          <button class="filter-btn" id="puzzle">🧩 Puzzle</button>
+          <button class="filter-btn" id="racing">🏎️ Racing</button>
         </div>
 
-        <!-- Results Section -->
-        <section class="game-list mt-10 max-w-7xl mx-auto">
+        <div class="filter-group">
+          <div class="filter-group-title">Platform</div>
+          <button class="filter-btn" id="playstation">🎮 PlayStation</button>
+          <button class="filter-btn" id="xbox">🎮 Xbox</button>
+          <button class="filter-btn" id="pc">🖥️ PC</button>
+          <button class="filter-btn" id="nintendo">🍄 Nintendo</button>
+          <button class="filter-btn" id="mobile">📱 Mobile</button>
+        </div>
 
-            <h2 class="text-2xl font-semibold text-gray-700 mb-4">Search Results</h2>
-            <div id="game-results" class="bg-white p-6 shadow-lg rounded-lg text-gray-700">
-                <p class="text-gray-500">Use the search above to find games matching your criteria.</p>
+        <div class="filter-group">
+          <div class="filter-group-title">Releases</div>
+          <button class="filter-btn" id="this-year">📅 This Year</button>
+          <button class="filter-btn" id="this-month">📅 This Month</button>
+          <button class="filter-btn" id="this-week">📅 This Week</button>
+          <button class="filter-btn" id="last-30">⬅️ Last 30 Days</button>
+          <button class="filter-btn" id="next-30">➡️ Next 30 Days</button>
+        </div>
 
+        <div class="filter-group">
+          <div class="filter-group-title">Browse</div>
+          <button class="filter-btn" id="developers">👾 Developers</button>
+        </div>
+      </aside>
+
+      <!-- ── Main ───────────────────────────────────────── -->
+      <main>
+        <!-- Search -->
+        <div class="search-wrap">
+          <div class="search-title">🔍 Search Games</div>
+          <form id="game-search-form" class="search-row">
+            <div class="search-input-wrap">
+              <input
+                type="text"
+                id="search-input"
+                placeholder="Search by title, genre, or platform…"
+                autocomplete="off"
+              />
+              <svg
+                id="mic-button"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M12 2a3 3 0 0 1 3 3v7a3 3 0 0 1-6 0V5a3 3 0 0 1 3-3Z"
+                />
+                <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3M8 22h8" />
+              </svg>
             </div>
-        </section>
-    </main>
+            <button type="submit" class="btn btn-primary">Search</button>
+            <button
+              type="button"
+              id="openCompareModal"
+              class="btn btn-secondary"
+            >
+              ⚖️ Compare
+            </button>
+          </form>
+        </div>
 
+        <!-- Results -->
+        <div id="game-results">
+          <div class="loading-state" style="color: var(--muted)">
+            <p style="font-size: 2rem">🎮</p>
+            <p>Search or pick a filter to discover games</p>
+          </div>
+        </div>
+      </main>
 
-    <!-- Previously Searched Games Sidebar -->
-    <aside
-        class="previous-searches-sidebar transition-colors duration-500 bg-white text-lg font-semibold text-gray-700 mb-2 absolute right-0 top-1/2 transform -translate-y-[65%]"
-        id="previous-searches">
-        <h3 class="text-lg font-semibold text-gray-700 mb-2">Recently Searched Games</h3>
-        <p class="text-sm text-green-500 mb-2">The last three games you searched will appear here.</p>
-        <!-- JavaScript will populate this section with the last 3 searched games -->
-    </aside>
+      <!-- ── Right Sidebar ──────────────────────────────── -->
+      <div class="right-sidebar">
+        <div class="sidebar-panel" id="previous-searches">
+          <div class="sidebar-title">🕹️ Recent Searches</div>
+          <p class="sidebar-empty">No searches yet.</p>
+        </div>
+      </div>
+    </div>
 
-    <!-- Footer Section -->
+    <!-- ── Game Detail Modal ──────────────────────────────── -->
+    <div id="gameDetailModal" class="modal-overlay">
+      <div class="modal-box">
+        <button class="modal-close" id="closeGameDetail">✕</button>
+        <div id="gameDetailBody"></div>
+      </div>
+    </div>
 
-    <footer class="bg-blue-600 text-white text-center py-4 mt-auto">
+    <!-- ── Compare Modal ──────────────────────────────────── -->
+    <div id="compareModal" class="modal-overlay">
+      <div class="modal-box">
+        <div class="modal-header">
+          <h2>⚖️ Game Comparison</h2>
+          <button
+            class="modal-close"
+            id="closeCompareModal"
+            style="position: static"
+          >
+            ✕
+          </button>
+        </div>
+        <div style="padding: 0 1.5rem 1.5rem">
+          <div class="color-row" style="margin-bottom: 1rem">
+            <label for="colorPicker">Panel color:</label>
+            <input type="color" id="colorPicker" value="#1a1a2e" />
+          </div>
+          <div class="compare-grid">
+            <div>
+              <input
+                type="text"
+                id="game1-input"
+                class="compare-input"
+                placeholder="Game 1 title…"
+              />
+              <div id="game1-details" class="compare-result-box">
+                Enter a game name above.
+              </div>
+            </div>
+            <div class="compare-divider"></div>
+            <div>
+              <input
+                type="text"
+                id="game2-input"
+                class="compare-input"
+                placeholder="Game 2 title…"
+              />
+              <div id="game2-details" class="compare-result-box">
+                Enter a game name above.
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button id="compareButton" class="btn btn-primary">Compare</button>
+            <button id="clearButton" class="btn btn-secondary">Clear</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
-        <p class="text-sm">&copy; 2024 Game Seek. All rights reserved.</p>
+    <!-- ── Footer ─────────────────────────────────────────── -->
+    <footer>
+      <p>
+        Crafted by <strong>Hassan</strong>, <strong>John</strong>,
+        <strong>Anthony</strong>, and <strong>Camryn</strong> — leveling up your
+        game discovery 🎮
+      </p>
+      <p style="margin-top: 0.4rem">© 2025 GameSeek · Powered by RAWG</p>
     </footer>
 
-    <!-- Dark Mode Toggle Button -->
-    <div class="fixed top-10 right-10 flex items-center">
-        <span class="mr-2">🌞</span>
-        <label for="themeToggle" class="relative inline-flex items-center cursor-pointer">
-            <input type="checkbox" id="themeToggle" class="sr-only" title="Toggle dark mode">
-            <div class="w-11 h-6 bg-gray-200 rounded-full dark:bg-gray-700" aria-labelledby="themeToggle">
-                <div class="dot absolute left-1 top-1 bg-white w-4 h-4 rounded-full transition"></div>
-            </div>
-        </label>
-        <span class="ml-2">🌜</span>
-    </div>
-    <style>
-        @media screen and (max-width: 768px) {
-            header.bg-blue-600 {
-                /* Adjusted specificity */
-                background-color: rgb(7, 185, 255);
-                /* Change header color */
-            }
-
-            .game-result {
-                width: 100%;
-                display: flex;
-                flex-direction: column;
-                flex-wrap: wrap;
-                justify-content: center;
-                align-items: center;
-            }
-        }
-    </style>
-
-
-    <!-- JavaScript -->
-    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
     <script src="js/script.js"></script>
     <script src="js/modal.js"></script>
     <script src="js/toggle.js"></script>
     <script src="js/voice.js"></script>
     <script src="js/home.js"></script>
-    </body>
-
+  </body>
 </html>
