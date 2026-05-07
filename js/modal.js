@@ -11,8 +11,8 @@ document.addEventListener("DOMContentLoaded", function () {
   const game2Details = document.getElementById("game2-details");
   const compareButton = document.getElementById("compareButton");
   const clearButton = document.getElementById("clearButton");
-  const colorPicker = document.getElementById("colorPicker");
-  const compareModalContainer = compareModal.querySelector(".bg-white"); // Select the modal container
+  const compareModalContainer = compareModal.querySelector(".modal-box");
+  // Select the modal container
 
   // Open comparison modal
   openCompareButton.addEventListener("click", () => {
@@ -50,8 +50,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
       container.innerHTML = `
                 <img src="${game.background_image}" alt="${
-        game.name
-      }" class="w-full mb-4 rounded-lg h-48 object-cover">
+                  game.name
+                }" class="w-full mb-4 rounded-lg h-48 object-cover">
                 <h3 class="text-lg font-bold">${game.name}</h3>
                 <p class="text-sm">Release Date: ${game.released}</p>
                 <p class="text-sm">Platforms: ${game.platforms
