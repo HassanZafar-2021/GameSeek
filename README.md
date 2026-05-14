@@ -56,14 +56,7 @@ Zafar Hassan
 
 ## License
 
-MIT
-
-### Third-Party Resources
-
-- This project uses the [RAWG Video Games Database API](https://rawg.io/apidocs) to provide up-to-date information on games, including release dates, platforms, genres, and publishers.
-- Usage of the RAWG API is subject to the [RAWG Terms of Service](https://rawg.io/terms_of_service) and [API License](https://rawg.io/apidocs), and all data provided by the RAWG API is attributed to RAWG.
-
-The last section of a high-quality README file is the license. This lets other developers know what they can and cannot do with your project. If you need help choosing a license, refer to [https://choosealicense.com/](https://choosealicense.com/).
+No License
 
 ## Features
 
@@ -123,5 +116,3 @@ We welcome contributions to enhance _GameSeek_! Here are a few ways you can help
 1. Fork the repository and create a new branch for your feature or fix.
 2. Make your changes and test them thoroughly.
 3. Submit a pull request with a clear description of your changes and the purpose behind them.
-
-Thank you for helping us improve _GameSeek_!
