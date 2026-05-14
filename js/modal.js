@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const API_KEY = "93fbde2a685d45cea6a36af991b6da2e"; // Replace with your RAWG API key
-
+  const API_KEY = CONFIG.API_KEY;
   // Modal elements
   const compareModal = document.getElementById("compareModal");
   const openCompareButton = document.getElementById("openCompareModal");

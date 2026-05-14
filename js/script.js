@@ -1,4 +1,4 @@
-const API_KEY = "93fbde2a685d45cea6a36af991b6da2e";
+const API_KEY = CONFIG.API_KEY;
 
 // ─── Dynamic Date Helpers ───────────────────────────────────────────────────
 function today() {
@@ -26,7 +26,12 @@ function startOf(unit) {
 // ─── Core Fetch ─────────────────────────────────────────────────────────────
 async function fetchGames(params = {}) {
   const base = "https://api.rawg.io/api/games";
-  const query = new URLSearchParams({ key: API_KEY, page_size: 20, ordering: "-rating", ...params });
+  const query = new URLSearchParams({
+    key: API_KEY,
+    page_size: 20,
+    ordering: "-rating",
+    ...params,
+  });
   const response = await fetch(`${base}?${query}`);
   if (!response.ok) throw new Error(`API error: ${response.status}`);
   const data = await response.json();
@@ -58,8 +63,22 @@ function renderGames(games, container, emptyMsg = "No games found.") {
         <h3 class="card-title">${game.name}</h3>
         <div class="card-meta">
           <span>📅 ${game.released || "TBA"}</span>
-          <span>🎮 ${game.platforms ? game.platforms.slice(0, 3).map(p => p.platform.name).join(", ") : "N/A"}</span>
-          <span>🏷️ ${game.genres ? game.genres.slice(0, 2).map(g => g.name).join(", ") : "N/A"}</span>
+          <span>🎮 ${
+            game.platforms
+              ? game.platforms
+                  .slice(0, 3)
+                  .map((p) => p.platform.name)
+                  .join(", ")
+              : "N/A"
+          }</span>
+          <span>🏷️ ${
+            game.genres
+              ? game.genres
+                  .slice(0, 2)
+                  .map((g) => g.name)
+                  .join(", ")
+              : "N/A"
+          }</span>
         </div>
       </div>
     `;
@@ -85,9 +104,16 @@ function openGameModal(game) {
         <div class="stat"><span class="stat-label">Metacritic</span><span class="stat-value">${game.metacritic ? "🏆 " + game.metacritic : "N/A"}</span></div>
         <div class="stat"><span class="stat-label">Playtime</span><span class="stat-value">${game.playtime ? game.playtime + "h avg" : "N/A"}</span></div>
       </div>
-      <p><strong>Platforms:</strong> ${game.platforms ? game.platforms.map(p => p.platform.name).join(", ") : "N/A"}</p>
-      <p><strong>Genres:</strong> ${game.genres ? game.genres.map(g => g.name).join(", ") : "N/A"}</p>
-      <p><strong>Tags:</strong> ${game.tags ? game.tags.slice(0, 6).map(t => `<span class="tag">${t.name}</span>`).join("") : "N/A"}</p>
+      <p><strong>Platforms:</strong> ${game.platforms ? game.platforms.map((p) => p.platform.name).join(", ") : "N/A"}</p>
+      <p><strong>Genres:</strong> ${game.genres ? game.genres.map((g) => g.name).join(", ") : "N/A"}</p>
+      <p><strong>Tags:</strong> ${
+        game.tags
+          ? game.tags
+              .slice(0, 6)
+              .map((t) => `<span class="tag">${t.name}</span>`)
+              .join("")
+          : "N/A"
+      }</p>
       ${game.website ? `<a href="${game.website}" target="_blank" class="visit-btn">🌐 Official Site</a>` : ""}
     </div>
   `;
@@ -117,28 +143,36 @@ async function searchGames(query) {
 // ─── Filter Fetchers (all dynamic dates) ─────────────────────────────────────
 const FILTER_MAP = {
   // Genres
-  action:    () => fetchGames({ genres: "action" }),
+  action: () => fetchGames({ genres: "action" }),
   adventure: () => fetchGames({ genres: "adventure" }),
-  rpg:       () => fetchGames({ genres: "role-playing-games-rpg" }),
-  shooter:   () => fetchGames({ genres: "shooter" }),
-  strategy:  () => fetchGames({ genres: "strategy" }),
-  sports:    () => fetchGames({ genres: "sports" }),
-  puzzle:    () => fetchGames({ genres: "puzzle" }),
-  racing:    () => fetchGames({ genres: "racing" }),
+  rpg: () => fetchGames({ genres: "role-playing-games-rpg" }),
+  shooter: () => fetchGames({ genres: "shooter" }),
+  strategy: () => fetchGames({ genres: "strategy" }),
+  sports: () => fetchGames({ genres: "sports" }),
+  puzzle: () => fetchGames({ genres: "puzzle" }),
+  racing: () => fetchGames({ genres: "racing" }),
 
   // Platforms (RAWG platform IDs)
   playstation: () => fetchGames({ platforms: "187,18,16" }), // PS5, PS4, PS3
-  xbox:        () => fetchGames({ platforms: "186,1,14" }),  // Xbox Series, One, 360
-  pc:          () => fetchGames({ platforms: "4" }),
-  nintendo:    () => fetchGames({ platforms: "7,83" }),      // Switch, Switch Lite
-  mobile:      () => fetchGames({ platforms: "21,3" }),      // Android, iOS
+  xbox: () => fetchGames({ platforms: "186,1,14" }), // Xbox Series, One, 360
+  pc: () => fetchGames({ platforms: "4" }),
+  nintendo: () => fetchGames({ platforms: "7,83" }), // Switch, Switch Lite
+  mobile: () => fetchGames({ platforms: "21,3" }), // Android, iOS
 
   // Releases — all dynamically computed
-  "this-year":  () => fetchGames({ dates: `${startOf("year")},${today()}`, ordering: "-added" }),
-  "this-month": () => fetchGames({ dates: `${startOf("month")},${today()}`, ordering: "-added" }),
-  "this-week":  () => fetchGames({ dates: `${startOf("week")},${today()}`, ordering: "-added" }),
-  "last-30":    () => fetchGames({ dates: `${daysFromNow(-30)},${today()}`, ordering: "-added" }),
-  "next-30":    () => fetchGames({ dates: `${today()},${daysFromNow(30)}`, ordering: "-released" }),
+  "this-year": () =>
+    fetchGames({ dates: `${startOf("year")},${today()}`, ordering: "-added" }),
+  "this-month": () =>
+    fetchGames({ dates: `${startOf("month")},${today()}`, ordering: "-added" }),
+  "this-week": () =>
+    fetchGames({ dates: `${startOf("week")},${today()}`, ordering: "-added" }),
+  "last-30": () =>
+    fetchGames({ dates: `${daysFromNow(-30)},${today()}`, ordering: "-added" }),
+  "next-30": () =>
+    fetchGames({
+      dates: `${today()},${daysFromNow(30)}`,
+      ordering: "-released",
+    }),
 
   // Developers
   developers: () => displayDevelopers(),
@@ -181,7 +215,7 @@ async function displayDevelopers() {
     const grid = document.createElement("div");
     grid.className = "dev-grid";
 
-    devs.forEach(dev => {
+    devs.forEach((dev) => {
       const card = document.createElement("div");
       card.className = "dev-card";
       card.innerHTML = `
@@ -207,7 +241,7 @@ async function displayDevelopers() {
 // ─── Previously Searched ─────────────────────────────────────────────────────
 function saveSearchedGame(game) {
   const prev = JSON.parse(localStorage.getItem("previousSearches")) || [];
-  const filtered = prev.filter(g => g.id !== game.id);
+  const filtered = prev.filter((g) => g.id !== game.id);
   filtered.unshift(game);
   const trimmed = filtered.slice(0, 3);
   localStorage.setItem("previousSearches", JSON.stringify(trimmed));
@@ -225,7 +259,7 @@ function renderPreviousSearches() {
     return;
   }
 
-  prev.forEach(game => {
+  prev.forEach((game) => {
     const item = document.createElement("div");
     item.className = "sidebar-item";
     item.innerHTML = `
@@ -254,22 +288,26 @@ document.addEventListener("DOMContentLoaded", () => {
   renderPreviousSearches();
 
   // Search form
-  document.getElementById("game-search-form")?.addEventListener("submit", e => {
-    e.preventDefault();
-    const query = document.getElementById("search-input").value.trim();
-    if (query) searchGames(query);
-  });
+  document
+    .getElementById("game-search-form")
+    ?.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const query = document.getElementById("search-input").value.trim();
+      if (query) searchGames(query);
+    });
 
   // All filter buttons
-  Object.keys(FILTER_MAP).forEach(id => {
-    document.getElementById(id)?.addEventListener("click", () => handleFilter(id));
+  Object.keys(FILTER_MAP).forEach((id) => {
+    document
+      .getElementById(id)
+      ?.addEventListener("click", () => handleFilter(id));
   });
 
   // Game detail modal close
   document.getElementById("closeGameDetail")?.addEventListener("click", () => {
     document.getElementById("gameDetailModal")?.classList.remove("open");
   });
-  document.getElementById("gameDetailModal")?.addEventListener("click", e => {
+  document.getElementById("gameDetailModal")?.addEventListener("click", (e) => {
     if (e.target === e.currentTarget) e.currentTarget.classList.remove("open");
   });
 
@@ -277,7 +315,9 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("openCompareModal")?.addEventListener("click", () => {
     document.getElementById("compareModal")?.classList.add("open");
   });
-  document.getElementById("closeCompareModal")?.addEventListener("click", () => {
-    document.getElementById("compareModal")?.classList.remove("open");
-  });
+  document
+    .getElementById("closeCompareModal")
+    ?.addEventListener("click", () => {
+      document.getElementById("compareModal")?.classList.remove("open");
+    });
 });
